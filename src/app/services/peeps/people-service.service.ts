@@ -10,7 +10,7 @@ export class PeopleServiceService {
 
   users: User[] = [];
 
-  private apiUrl = 'http://localhost:5432/api/peeps'
+  private apiUrl = 'http://localhost:5433/api/peeps'
   constructor(private httpClient: HttpClient) { }
 
   getUsers(): Observable<User[]>{
