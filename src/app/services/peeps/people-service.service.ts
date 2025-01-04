@@ -10,7 +10,7 @@ export class PeopleServiceService {
 
   users: User[] = [];
 
-  private apiUrl = 'http://localhost:5433/api/peeps'
+  private apiUrl = 'http://localhost:3532/api/peeps'
   constructor(private httpClient: HttpClient) { }
 
   getUsers(): Observable<User[]>{
@@ -22,6 +22,7 @@ export class PeopleServiceService {
   }
   getUserByUsername(username: string){
     let id=-1;
+    this.getUsers();
     for (let user of this.users){
       if (user.username === username){
         id = user.id;

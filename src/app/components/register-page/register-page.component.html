@@ -1,1 +1,39 @@
-<p>register-page works!</p>
+<div class="form-container">
+  <form (ngSubmit)="submitForm()">  <!--[formGroup]="form"-->
+    <div *ngIf="currentStep === 0">
+      <h2>Step 1: Personal Details</h2>
+      <label for="firstName">First Name:</label>
+      <input id="firstName" [(ngModel)]="formData.user_firstName"
+             type="text" placeholder="First Name" required/>
+      <label for="lastName">Last Name:</label>
+      <input id="lastName" [(ngModel)]="formData.user_lastName"
+             type="text" placeholder="Last Name"/>
+      <label for="phone_nr">Phone Number:</label>
+      <input id="phone_nr" [(ngModel)]="formData.user_phoneNr"
+             type="text" placeholder="Phone Number"/>
+      <label for="email">Email:</label>
+      <input id="email" [(ngModel)]="formData.user_email"
+             type="email" placeholder="Email" required/>
+    </div>
+
+    <div *ngIf="currentStep === 1">
+      <h2>Step 2: Account Details</h2>
+      <label for="username">Username:</label>
+      <input id="username" [(ngModel)]="formData.username"
+             type="text" placeholder="Username" required/>
+      <label for="password">Password:</label>
+      <input id="password" [(ngModel)]="formData.password"
+             type="password" placeholder="Password" required/>
+      <label for="confirmPassword">Confirm Password:</label>
+      <input id="confirmPassword" [(ngModel)]="formData.passwordConfirm"
+             type="password" placeholder="Confirm Password" required/>
+    </div>
+
+    <div class="form-navigation">
+      <button type="button" (click)="prevStep()" [disabled]="currentStep === 0">Previous</button>
+      <button type="button" (click)="nextStep()">
+        {{ currentStep === 1 ? 'Submit' : 'Next' }}
+      </button>
+    </div>
+  </form>
+</div>
