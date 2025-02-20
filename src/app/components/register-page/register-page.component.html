@@ -1,39 +1,53 @@
 <div class="form-container">
-  <form (ngSubmit)="submitForm()">  <!--[formGroup]="form"-->
+  <form [formGroup]="form">
     <div *ngIf="currentStep === 0">
       <h2>Step 1: Personal Details</h2>
+
       <label for="firstName">First Name:</label>
-      <input id="firstName" [(ngModel)]="formData.user_firstName"
-             type="text" placeholder="First Name" required/>
+      <input id="firstName" formControlName="user_firstName"
+             type="text" placeholder="First Name" required />
+
       <label for="lastName">Last Name:</label>
-      <input id="lastName" [(ngModel)]="formData.user_lastName"
-             type="text" placeholder="Last Name"/>
+      <input id="lastName" formControlName="user_lastName"
+             type="text" placeholder="Last Name" />
+
       <label for="phone_nr">Phone Number:</label>
-      <input id="phone_nr" [(ngModel)]="formData.user_phoneNr"
-             type="text" placeholder="Phone Number"/>
+      <input id="phone_nr" formControlName="user_phoneNr"
+             type="text" placeholder="Phone Number" />
+
       <label for="email">Email:</label>
-      <input id="email" [(ngModel)]="formData.user_email"
-             type="email" placeholder="Email" required/>
+      <input id="email" formControlName="user_email"
+             type="email" placeholder="Email" required />
     </div>
 
+    <!-- Step 2: Account Details -->
     <div *ngIf="currentStep === 1">
       <h2>Step 2: Account Details</h2>
+
       <label for="username">Username:</label>
-      <input id="username" [(ngModel)]="formData.username"
-             type="text" placeholder="Username" required/>
+      <input id="username" formControlName="username"
+             type="text" placeholder="Username" required />
+
       <label for="password">Password:</label>
-      <input id="password" [(ngModel)]="formData.password"
-             type="password" placeholder="Password" required/>
+      <input id="password" formControlName="password"
+             type="password" placeholder="Password" required />
+
       <label for="confirmPassword">Confirm Password:</label>
-      <input id="confirmPassword" [(ngModel)]="formData.passwordConfirm"
-             type="password" placeholder="Confirm Password" required/>
+      <input id="confirmPassword" formControlName="passwordConfirm"
+             type="password" placeholder="Confirm Password" required />
     </div>
 
+    <!-- Navigation Buttons -->
     <div class="form-navigation">
       <button type="button" (click)="prevStep()" [disabled]="currentStep === 0">Previous</button>
-      <button type="button" (click)="nextStep()">
-        {{ currentStep === 1 ? 'Submit' : 'Next' }}
+      <button type="button" >
+        <span *ngIf="currentStep === 0" (click)="nextStep()">Next</span>
+        <span *ngIf="currentStep !== 0" (click)="submitForm()">Submit</span>
       </button>
+
     </div>
+
+    <p id="no_account">Already have an account?</p>
+    <a routerLink="/">Login now</a>
   </form>
 </div>

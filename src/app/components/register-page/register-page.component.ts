@@ -1,16 +1,18 @@
-import {Component} from '@angular/core';
-import {FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
-import {FormBuilder, FormGroup, FormsModule} from "@angular/forms";
-import {RouterLink} from "@angular/router";
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import { PeopleServiceService } from '../../services/peeps/people-service.service';
 import {User} from "../../model/user";
-import {CommonModule} from "@angular/common";
 
 @Component({
   selector: 'app-register-page',
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule, ReactiveFormsModule,
+    FormsModule,
+    ReactiveFormsModule,
     RouterLink
   ],
   templateUrl: './register-page.component.html',
@@ -18,38 +20,18 @@ import {CommonModule} from "@angular/common";
 })
 export class RegisterPageComponent {
   currentStep: number = 0;
-  //form: FormGroup;
-  formData: {
-      user_firstName: string,
-      user_lastName: string,
-      user_phoneNr: string,
-      user_email: string
-      username: string,
-      password: string,
-      passwordConfirm: string
-  }
+  form: FormGroup;
 
-  constructor(private fb: FormBuilder) {
-    //console.log('consrtuctor');
-    this.formData = {
-      user_firstName: '',
-      user_lastName: '',
-      user_phoneNr: '',
-      user_email: '',
-      username: '',
-      password: '',
-      passwordConfirm: ''
-    };
-    // this.form = this.fb.group({
-    //     firstName: new FormControl(),
-    //     //firstName: ['', Validators.required],
-    //     lastName: [''],
-    //     phone: ['',],
-    //     email: ['', [Validators.required, Validators.email]],
-    //     username: ['', Validators.required],
-    //     password: ['', Validators.required],
-    //     confirmPassword: ['', Validators.required]
-    // });
+  constructor(private fb: FormBuilder, private userService: PeopleServiceService) {
+    this.form = this.fb.group({
+      user_firstName: ['', Validators.required],
+      user_lastName: [''],
+      user_phoneNr: [''],
+      user_email: ['', [Validators.required, Validators.email]],
+      username: ['', Validators.required],
+      password: ['', Validators.required],
+      passwordConfirm: ['', Validators.required]
+    });
   }
 
   nextStep() {
@@ -67,16 +49,34 @@ export class RegisterPageComponent {
   }
 
   submitForm(): void {
-    console.log('Form submitted');
-    // if (this.form.valid) {
-    //   this.formData = {
-    //     // personalDetails: this.form.get('personalDetails')?.value,
-    //     // accountDetails: this.form.get('accountDetails')?.value,
-    //   };
-    //   console.log('Form submitted:', this.formData);
-    // } else {
-    //   console.log('Form is invalid');
-    // }
-  }
+    if (this.form.valid) {
+      console.log('Form submitted:', this.form.value);
+      const newUser: User = {
+        id: 0,
+        first_name: this.form.value.user_firstName,
+        last_name: this.form.value.user_lastName,
+        phone_nr: this.form.value.user_phoneNr,
+        email: this.form.value.user_email,
+        username: this.form.value.username,
+        password: this.form.value.password,
+        user_type: 'user',
+        is_enabled: false
+      };
 
+      this.userService.addUser(newUser).subscribe(
+        response => {
+          console.log('User added:', response);
+          alert('User registered successfully!');
+          this.form.reset();
+          this.currentStep = 0;
+        },
+        error => {
+          console.error('Error registering user:', error);
+          alert('Failed to register. Please try again.');
+        }
+      );
+    } else {
+      alert('Please fill in all required fields.');
+    }
+  }
 }

@@ -39,7 +39,9 @@ export class PeopleServiceService {
     }
     return id;
   }
-  addUser(user: User):Observable<User>{
+  addUser(user: User)//:Observable<User>{
+  {
+    //console.log("KILLL MEEEEEEEE",user);
     return this.httpClient.post<User>(this.apiUrl, user);
   }
   deleteUser(id: number):Observable<User>
