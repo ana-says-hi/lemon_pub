@@ -48,18 +48,7 @@ app.use(cors({
   allowedHeaders: 'Content-Type,Authorization'
 }));
 
-// const pool = new Pool({
-//   user: 'postgres',
-//   host: 'localhost',
-//   database: 'lemon_basket',
-//   password: 'pass',
-//   port: 5432,
-// });
-
-// app.get('/api/protected', authenticateUser, (req, res) => {
-//   res.json({ message: `Hello, ${req.user.email}! You are authenticated.` });
-// });
-
+// user stuff
 app.get('/api/peeps', async (req, res) => {
   try {
     // const result = await pool.query('SELECT * FROM peeps');
@@ -73,10 +62,9 @@ app.get('/api/peeps', async (req, res) => {
   }
 });
 
-//TODO VERIFICA FUNCTIILE: DOCID SI ID STUFF
 app.post('/api/peeps', async (req, res) => {
   try {
-    const { id, first_name, last_name, phone_nr, email, username, password, user_type } = req.body;
+    const { id, first_name, last_name, phone_nr, email, username, user_type } = req.body;
 
     const newUser = {
       id,
@@ -85,19 +73,23 @@ app.post('/api/peeps', async (req, res) => {
       phone_nr,
       email,
       username,
-      password, // ⚠️ TODO Hash this before storing in production
+     // password,
       user_type,
       is_enabled: false,
     };
 
-    const docRef = await db.collection('peeps').add(newUser);
-    res.json({ id: docRef.id, ...newUser });
+    //const docRef = await db.collection('peeps').add(newUser);
+    //res.json({ id: docRef.id, ...newUser });
+    const docRef = await db.collection('peeps').doc(email).set(newUser);
+    res.json({ id: email, ...newUser });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
   }
 });
 
+
+//TODO VERIFICA FUNCTIILE: DOCID SI ID STUFF
 app.get('/api/peeps/:id', async (req, res) => {
   try {
     const doc = await db.collection('peeps').doc(req.params.id).get();
@@ -132,6 +124,23 @@ app.delete('/api/peeps/:id', async (req, res) => {
   }
 });
 
+
+//files stuff
+//TODO: check FILES STUFF
+app.get('/api/user_files', async (req, res) => {
+  try {
+    const snapshot = await db.collection('files').get();
+    const files = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    res.json(files);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+app.post('api/user_files',async (req, res)=>{
+
+})
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);

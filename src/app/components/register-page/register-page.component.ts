@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import { PeopleServiceService } from '../../services/peeps/people-service.service';
 import {User} from "../../model/user";
+import {AuthService} from "../../services/auth/auth.service";
 
 @Component({
   selector: 'app-register-page',
@@ -22,7 +23,8 @@ export class RegisterPageComponent {
   currentStep: number = 0;
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private userService: PeopleServiceService) {
+  constructor(private fb: FormBuilder, private userService: PeopleServiceService,
+              private authService: AuthService, private router: Router) {
     this.form = this.fb.group({
       user_firstName: ['', Validators.required],
       user_lastName: [''],
@@ -58,11 +60,22 @@ export class RegisterPageComponent {
         phone_nr: this.form.value.user_phoneNr,
         email: this.form.value.user_email,
         username: this.form.value.username,
-        password: this.form.value.password,
+        //password: this.form.value.password,
         user_type: 'user',
         is_enabled: false
       };
 
+      //add user in firebase-authenthicator
+      this.authService.register(this.form.value.user_email, this.form.value.password)
+        .then(() => {
+          //console.log('Login successful');
+          this.router.navigate(['/']);
+        })
+        .catch(error => {
+          console.error('Login failed:', error.message);
+        });
+
+      //add user in big db
       this.userService.addUser(newUser).subscribe(
         response => {
           console.log('User added:', response);
