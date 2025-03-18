@@ -1,10 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {PeopleServiceService} from "../../services/peeps/people-service.service";
-import {User} from "../../model/user";
+import {Component, inject} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {Router, RouterLink} from "@angular/router";
-import { getAuth } from "firebase/auth";
 import {AuthService} from "../../services/auth/auth.service";
+import {signInWithEmailAndPassword} from "@angular/fire/auth";
+import {getAuth} from "firebase/auth";
 
 
 @Component({
@@ -20,23 +19,25 @@ import {AuthService} from "../../services/auth/auth.service";
   //providers: [AuthService],
 })
 export class LoginPageComponent {
-  //auth = getAuth();
+  //auth = inject(AuthService);
 
   mail_username: string = "";
   password: string = "";
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService ,private router: Router) { // private authService: AuthService,
     console.log('constructor_log');
   }
 
   loginUser() {
-    this.authService.login(this.mail_username, this.password)
-      .then(() => {
-        //console.log('Login successful');
-        this.router.navigate(['/profile']);
-      })
-      .catch(error => {
-        console.error('Login failed:', error.message);
-      });
+    //console.log(getAuth());
+    //signInWithEmailAndPassword(getAuth(), this.mail_username, this.password)
+   // this.authService.login(this.mail_username, this.password)
+   //    .then(() => {
+   //      //console.log('Login successful');
+   //      this.router.navigate(['/profile']);
+   //    })
+   //    .catch(error => {
+   //      console.error('Login failed:', error.message);
+   //    });
   }
 }

@@ -1,0 +1,20 @@
+<body>
+<p>work works!</p>
+<!--puse orizontal chestiile de aici+ seee more daca e mai lunga descrierea-->
+
+<button class="btn" (click)="addBook()" >Add work</button>
+
+
+<!--asta daca e lista goala-->
+<p class="nothing"> Nothing to see here yet. Add your first work!</p>
+
+<div *ngFor="let book of books" class="book">
+  <img alt="cover" src="https://images.unsplash.com/photo-1556740739-887f6717d7e4?ixi"/>
+  <div class="book-info">
+    <h3>{{ book.bookTitle }}</h3>
+    <p>{{ book.description }}</p>
+  </div>
+  <img alt="file_type">
+</div>
+</body>
+

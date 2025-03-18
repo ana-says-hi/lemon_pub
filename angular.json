@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "LemonPub": {
+    "lemons-24438": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -23,7 +23,13 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "src/assets/",
+                "output": "/assets/"
+              },
+              {
+                "glob": "favicon.ico",
+                "input": "src/",
+                "output": "/"
               }
             ],
             "styles": [
@@ -59,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "LemonPub:build:production"
+              "buildTarget": "lemons-24438:build:production"
             },
             "development": {
-              "buildTarget": "LemonPub:build:development"
+              "buildTarget": "lemons-24438:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -85,8 +91,15 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src",
+                "src/assets"
+              ]
+            },
             "scripts": []
           }
         }

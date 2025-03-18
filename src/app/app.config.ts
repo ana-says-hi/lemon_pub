@@ -1,13 +1,30 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter, withComponentInputBinding } from '@angular/router';
-import { provideHttpClient } from "@angular/common/http";
+import {ApplicationConfig, importProvidersFrom, provideZoneChangeDetection} from '@angular/core';
+import {provideRouter, withComponentInputBinding} from '@angular/router';
+import {provideHttpClient} from "@angular/common/http";
 
-import { routes } from './app.routes';
+import {routes} from './app.routes';
+import {provideFirebaseApp, initializeApp as initializeApp_alias} from "@angular/fire/app";
+import {provideAuth, getAuth as getAuth_alias} from "@angular/fire/auth";
+import {provideFirestore, getFirestore as getFirestore_alias} from "@angular/fire/firestore";
+import {getFirestore} from "firebase/firestore";
+import {getAuth} from "firebase/auth";
+import {getApp, initializeApp} from "firebase/app";
+import {environment} from "../environments/environment";
+import {getStorage, provideStorage} from "@angular/fire/storage";
+import {AngularFireModule} from "@angular/fire/compat";
+import {AngularFireAuth, AngularFireAuthModule} from "@angular/fire/compat/auth";
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideZoneChangeDetection({eventCoalescing: true}),
     provideRouter(routes, withComponentInputBinding()),
-    provideHttpClient()
+    provideHttpClient(),
+    // provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
+    // provideFirestore(() => getFirestore()),
+    // importProvidersFrom(AngularFireModule.initializeApp(environment.firebaseConfig),
+    //   AngularFireAuthModule),
+    // provideAuth(() => getAuth(getApp())),
+
+    // provideStorage(() => getStorage()), provideFirebaseApp(() => initializeApp({"projectId":"lemons-24438","appId":"1:777735442779:web:89692fee8dd4e54b928a7e","databaseURL":"https://lemons-24438-default-rtdb.firebaseio.com","storageBucket":"lemons-24438.firebasestorage.app","apiKey":"AIzaSyC5bPqO7pnKo9SyKIdh-Pw5zDU6DQJb4nI","authDomain":"lemons-24438.firebaseapp.com","messagingSenderId":"777735442779","measurementId":"G-Z7PKPWLFDH"})), provideAuth(() => getAuth()), provideFirestore(() => getFirestore()), provideStorage(() => getStorage()),
   ]
 };

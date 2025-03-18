@@ -1,0 +1,23 @@
+<body>
+<c-carousel (itemChange)="onItemChange($event)" [interval]="5000" transition="slide">
+  <c-carousel-indicators></c-carousel-indicators>
+  <c-carousel-inner>
+    <c-carousel-item
+      class="card"
+      *ngFor="let slide of slides; let i = index"
+      [class.active]="i === activeSlide"
+      [ngStyle]="{'background-image': i === activeSlide ? 'url(' + slide.src + ')' : 'none'}">
+      <c-carousel-caption *ngIf="i === activeSlide">
+        <h3>{{slide.title}}</h3>
+        <p>{{slide.subtitle}}</p>
+      </c-carousel-caption>
+
+    </c-carousel-item>
+  </c-carousel-inner>
+<!--  <c-carousel-control-prev [routerLink] caption="Previous" direction="prev"></c-carousel-control-prev>-->
+<!--  <c-carousel-control-next [routerLink] caption="Next" direction="next"></c-carousel-control-next>-->
+
+</c-carousel>
+<p>&#64;copyrights to myself</p>
+
+</body>

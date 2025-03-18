@@ -24,7 +24,7 @@ export class RegisterPageComponent {
   form: FormGroup;
 
   constructor(private fb: FormBuilder, private userService: PeopleServiceService,
-              private authService: AuthService, private router: Router) {
+               private router: Router) { //private authService: AuthService,
     this.form = this.fb.group({
       user_firstName: ['', Validators.required],
       user_lastName: [''],
@@ -66,14 +66,14 @@ export class RegisterPageComponent {
       };
 
       //add user in firebase-authenthicator
-      this.authService.register(this.form.value.user_email, this.form.value.password)
-        .then(() => {
-          //console.log('Login successful');
-          this.router.navigate(['/']);
-        })
-        .catch(error => {
-          console.error('Login failed:', error.message);
-        });
+      // this.authService.register(this.form.value.user_email, this.form.value.password)
+      //   .then(() => {
+      //     //console.log('Login successful');
+      //     this.router.navigate(['/']);
+      //   })
+      //   .catch(error => {
+      //     console.error('Login failed:', error.message);
+      //   });
 
       //add user in big db
       this.userService.addUser(newUser).subscribe(

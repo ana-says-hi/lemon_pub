@@ -11,8 +11,6 @@ const port = 3532;
 app.use(cors());
 app.use(express.json());
 
-// const auth = getAuth(app);
-
 
 // Load service account credentials
 const serviceAccount = require('./serviceAccountKey.json');
