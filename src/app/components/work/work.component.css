@@ -35,3 +35,11 @@ body{
   font-size: 0.9em;
   color: #666;
 }
+
+
+/*.custom-dialog-container .mat-mdc-dialog-surface {*/
+/*  border: 10px solid #ff4081;*/
+/*  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);*/
+/*  border-radius: 8px;*/
+/*  background-clip: padding-box; */
+/*}*/

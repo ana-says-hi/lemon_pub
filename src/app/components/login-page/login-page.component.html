@@ -1,16 +1,29 @@
+<body>
 
+<div class="container">
+  <div class="left-panel">
+    <div class="form-container">
+      <form name="login" (ngSubmit)="loginUser()">
+        <label for="email_username">Email or username:</label>
+        <input type="text" [(ngModel)]="mail_username" id="email_username"
+               [ngModelOptions]="{standalone: true}">
+        <label for="password">Password:</label>
+        <input type="password" id="password" [(ngModel)]="password"
+               [ngModelOptions]="{standalone: true}">
 
-<form name="login" (ngSubmit)="loginUser()">
-  <label for="email_username">Email or username:</label>
-  <input type="text" [(ngModel)]="mail_username" id="email_username"
-         [ngModelOptions]="{standalone: true}">
-  <label for="password">Password:</label>
-  <input type="password" id="password" [(ngModel)]="password"
-         [ngModelOptions]="{standalone: true}">
+        <button type="submit"> Login</button>
 
-  <button type="submit"> Login </button>
+        <p id="no_account">Don't have an account?</p>
+        <a routerLink="/register">Register now!</a>
+      </form>
+    </div>
 
-  <p id="no_account">Don't have an account?</p>
-  <a routerLink="/register">Register now!</a>
-</form>
+  </div>
+  <div class="right-panel">
+    <div class="image-container">
+      <img src="/assets/scene/bluebebs_smaller.png" alt="Blueberries">
+    </div>
+  </div>
+</div>
 
+</body>

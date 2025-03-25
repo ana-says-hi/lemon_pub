@@ -10,9 +10,9 @@ import {Router} from "@angular/router";
 })
 export class ProfilePageComponent {
   constructor(private router: Router) {
-    // if(localStorage.getItem('user_token') === null){
-    //   //window.location.href = '/login';
-    //   this.router.navigate(['/login']);
-    // }
+    if(localStorage.getItem('user_email') === null){
+      //window.location.href = '/login';
+      this.router.navigate(['/login']);
+    }
   }
 }

@@ -1,0 +1,39 @@
+<body>
+
+<div class="dialog-header">
+  <h2>Add a New Book</h2>
+</div>
+<!--<hr>-->
+<form>
+  <label>Book Title:</label>
+  <input type="text" [(ngModel)]="newBook.bookTitle">
+  <br>
+
+  <label>Description:</label>
+<!--  <button (click)="generateSummary()">Generate Summary with AI</button>-->
+  <textarea [(ngModel)]="newBook.description"></textarea>
+  <br>
+
+<!--  <label>File Type:</label>-->
+<!--  <input type="text" [(ngModel)]="newBook.fileType">-->
+<!--  <br>-->
+
+  <div class="form-row">
+    <label>File Type:</label>
+    <select id="fileType" [(ngModel)]="newBook.fileType">
+      <option value="pdf">PDF</option>
+      <option value="txt">TXT</option>
+      <option value="word">Word Document</option>
+    </select>
+
+    <label>Visibility:</label>
+    <input type="checkbox" [(ngModel)]="newBook.visibility">
+    <br>
+  </div>
+
+  <div class="button-container">
+    <button mat-button (click)="saveBook()">Save</button>
+    <button mat-button (click)="closeDialog()">Cancel</button>
+  </div>
+</form>
+</body>

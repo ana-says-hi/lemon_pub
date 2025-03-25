@@ -53,17 +53,23 @@ export class RegisterPageComponent {
   submitForm(): void {
     if (this.form.valid) {
       console.log('Form submitted:', this.form.value);
-      const newUser: User = {
-        id: 0,
-        first_name: this.form.value.user_firstName,
-        last_name: this.form.value.user_lastName,
-        phone_nr: this.form.value.user_phoneNr,
-        email: this.form.value.user_email,
-        username: this.form.value.username,
-        //password: this.form.value.password,
-        user_type: 'user',
-        is_enabled: false
-      };
+
+      if(this.form.value.password !== this.form.value.passwordConfirm) {
+        alert('Passwords do not match.');
+        return;
+      }
+
+      const newUser = new User(
+        0,
+        this.form.value.user_email as string,
+        this.form.value.username as string,
+        this.form.value.user_firstName as string,
+        this.form.value.user_lastName as string,
+        this.form.value.user_phoneNr as string,
+        false,
+        'user',
+        this.form.value.password as string
+      );
 
       //add user in firebase-authenthicator
       // this.authService.register(this.form.value.user_email, this.form.value.password)
@@ -91,5 +97,6 @@ export class RegisterPageComponent {
     } else {
       alert('Please fill in all required fields.');
     }
+    this.router.navigate(['/']);
   }
 }

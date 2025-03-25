@@ -1,0 +1,122 @@
+.dialog-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1F1C3F;
+  height: fit-content(100vh);
+  /*margin-bottom: 20px;*/
+}
+
+h2 {
+  font-size: 17px;
+  text-align: center;
+  color: lightgoldenrodyellow;
+  margin-top: 5px;
+}
+
+/*hr {*/
+/*  width: 100%;*/
+/*  border: 1px solid lightgoldenrodyellow;*/
+/*  margin-bottom: 20px;*/
+/*}*/
+
+/*.form-container {*/
+/*  display: flex;*/
+/*  justify-content: center;*/
+/*  align-items: center;*/
+/*  width: 100%;*/
+/*  height: auto;*/
+/*  padding: 20px;*/
+/*}*/
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #675d91;
+  padding: 30px;
+  /*width: 400px;*/
+  /*border-radius: 10px;*/
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+label {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 6px;
+  font-weight: bold;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 8px;
+  border: 2px solid #1F1C3F;
+  border-radius: 5px;
+  background-color: #433C5F;
+  color: white;
+  font-size: 16px;
+}
+
+textarea {
+  height: 80px;
+  resize: none;
+}
+
+button {
+  min-width: 150px;
+  padding: 10px;
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #675d91;
+  color: white;
+}
+
+button:first-of-type {
+  background: #ffcc00;
+  color: black;
+}
+
+button:first-of-type:hover {
+  background: #e6b800;
+}
+
+button:last-of-type {
+  background: #d9534f;
+  color: white;
+}
+
+button:last-of-type:hover {
+  background: #c9302c;
+}
+
+input[type="checkbox"] {
+  margin-left: 10px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end; /* Aligns buttons to the right */
+  gap: 10px; /* Adds spacing between buttons */
+  margin-top: 10px; /* Adds spacing from the above content */
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  /*gap: 10px;*/
+  margin-top: 10px;
+}
+
+.form-row select {
+  margin-right: 20px;
+}
+

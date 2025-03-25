@@ -1,9 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+/*html, body { height: 100%; }*/
+
 body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f8f9fa;
+  /*background-color: #433C5F;*/
+  background-color: #675d91;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Navbar */
@@ -11,14 +16,15 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #ffcc00;
+  /*background-color: #ffcc00;*/
+  background-color: #110e29;
   padding: 15px 30px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .navbar a {
   text-decoration: none;
-  color: #333;
+  color: #f1f1f1;
   font-weight: bold;
   margin: 0 15px;
   transition: color 0.3s;
@@ -34,8 +40,36 @@ body {
 }
 
 .profile a {
+  background: #555;
+  padding: 8px 15px;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile a:hover {
   background: #fff;
   padding: 8px 15px;
   border-radius: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  width: min-content;
+  height: 100%;
+}
+
+label {
+  margin-bottom: 6px;
+  color: lightgoldenrodyellow;
+  font-weight: 600;
 }

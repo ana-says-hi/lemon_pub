@@ -8,6 +8,8 @@ import {getAuth} from "firebase/auth";
 import {provideFirebaseApp} from "@angular/fire/app";
 import {provideFirestore} from "@angular/fire/firestore";
 import {getFirestore} from "firebase/firestore";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 // if (!getApps().length) {
 //   console.log("Initializing Firebase...");
@@ -20,12 +22,13 @@ bootstrapApplication(AppComponent, {
     provideFirebaseApp(() => app),
     provideAuth(() => getAuth(app)),
     provideFirestore(() => getFirestore()),
-    ...appConfig.providers
+    ...appConfig.providers, provideAnimationsAsync()
   ]
 }).catch(err => console.error(err));
 
 
 console.log("App initialized:", getApp());
+// console.log("Auth initialized:", getAuth());
 
 // const app2 = initializeApp(environment.firebaseConfig);
 //

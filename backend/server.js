@@ -124,10 +124,10 @@ app.delete('/api/peeps/:id', async (req, res) => {
 
 
 //files stuff
-//TODO: check FILES STUFF
 app.get('/api/user_files', async (req, res) => {
   try {
-    const snapshot = await db.collection('files').get();
+    console.log("here");
+    const snapshot = await db.collection('user_files').get();
     const files = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
     res.json(files);
   } catch (err) {
@@ -136,6 +136,7 @@ app.get('/api/user_files', async (req, res) => {
   }
 });
 
+//TODO: check FILES STUFF
 app.post('api/user_files',async (req, res)=>{
 
 })

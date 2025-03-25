@@ -1,14 +1,15 @@
-export class UserFile{
+export class UserFile {
   //fileID: string;
-  //userID: string;
-  bookTitle:string;
+  userEmail: string;
+  bookTitle: string;
   description: string;
-  fileType:string;
+  fileType: string;
   //timestamp:string;
-  visibility:boolean;
+  visibility: boolean;
 
 //! THIS IS JUST FOR TESTING
-  constructor(bookTitle: string, description: string, fileType: string) {
+  constructor(userEmail: string, bookTitle: string, description: string, fileType: string) {
+    this.userEmail=userEmail;
     this.bookTitle = bookTitle;
     this.description = description;
     this.fileType = fileType;

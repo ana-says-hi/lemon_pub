@@ -1,53 +1,63 @@
-<div class="form-container">
-  <form [formGroup]="form">
-    <div *ngIf="currentStep === 0">
-      <h2>Step 1: Personal Details</h2>
+<div class="container">
+  <div class="left-panel">
+    <div class="form-container">
+      <form [formGroup]="form">
+        <div *ngIf="currentStep === 0">
+          <h2>Step 1: Personal Details</h2>
 
-      <label for="firstName">First Name:</label>
-      <input id="firstName" formControlName="user_firstName"
-             type="text" placeholder="First Name" required />
+          <label for="firstName">First Name:</label>
+          <input id="firstName" formControlName="user_firstName"
+                 type="text" placeholder="First Name" required/>
 
-      <label for="lastName">Last Name:</label>
-      <input id="lastName" formControlName="user_lastName"
-             type="text" placeholder="Last Name" />
+          <label for="lastName">Last Name:</label>
+          <input id="lastName" formControlName="user_lastName"
+                 type="text" placeholder="Last Name"/>
 
-      <label for="phone_nr">Phone Number:</label>
-      <input id="phone_nr" formControlName="user_phoneNr"
-             type="text" placeholder="Phone Number" />
+          <label for="phone_nr">Phone Number:</label>
+          <input id="phone_nr" formControlName="user_phoneNr"
+                 type="text" placeholder="Phone Number"/>
 
-      <label for="email">Email:</label>
-      <input id="email" formControlName="user_email"
-             type="email" placeholder="Email" required />
+          <label for="email">Email:</label>
+          <input id="email" formControlName="user_email"
+                 type="email" placeholder="Email" required/>
+        </div>
+
+        <!-- Step 2: Account Details -->
+        <div *ngIf="currentStep === 1">
+          <h2>Step 2: Account Details</h2>
+
+          <label for="username">Username:</label>
+          <input id="username" formControlName="username"
+                 type="text" placeholder="Username" required/>
+
+          <label for="password">Password:</label>
+          <input id="password" formControlName="password"
+                 type="password" placeholder="Password" required/>
+
+          <label for="confirmPassword">Confirm Password:</label>
+          <input id="confirmPassword" formControlName="passwordConfirm"
+                 type="password" placeholder="Confirm Password" required/>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="form-navigation">
+          <button type="button" (click)="prevStep()" [disabled]="currentStep === 0">Previous</button>
+          <button type="button">
+            <span *ngIf="currentStep === 0" (click)="nextStep()">Next</span>
+            <span *ngIf="currentStep !== 0" (click)="submitForm()">Submit</span>
+          </button>
+
+        </div>
+
+        <p id="no_account">Already have an account?</p>
+        <a routerLink="/login">Login now</a>
+      </form>
     </div>
+  </div>
 
-    <!-- Step 2: Account Details -->
-    <div *ngIf="currentStep === 1">
-      <h2>Step 2: Account Details</h2>
-
-      <label for="username">Username:</label>
-      <input id="username" formControlName="username"
-             type="text" placeholder="Username" required />
-
-      <label for="password">Password:</label>
-      <input id="password" formControlName="password"
-             type="password" placeholder="Password" required />
-
-      <label for="confirmPassword">Confirm Password:</label>
-      <input id="confirmPassword" formControlName="passwordConfirm"
-             type="password" placeholder="Confirm Password" required />
+  <div class="right-panel">
+    <div class="image-container">
+      <img src="/assets/scene/bluebebs_smaller.png" alt="Blueberries">
     </div>
-
-    <!-- Navigation Buttons -->
-    <div class="form-navigation">
-      <button type="button" (click)="prevStep()" [disabled]="currentStep === 0">Previous</button>
-      <button type="button" >
-        <span *ngIf="currentStep === 0" (click)="nextStep()">Next</span>
-        <span *ngIf="currentStep !== 0" (click)="submitForm()">Submit</span>
-      </button>
-
-    </div>
-
-    <p id="no_account">Already have an account?</p>
-    <a routerLink="/">Login now</a>
-  </form>
+  </div>
 </div>

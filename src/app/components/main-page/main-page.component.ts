@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {RouterLink} from "@angular/router";
-import { CarouselModule } from '@coreui/angular';
+import {Router, RouterLink} from "@angular/router";
+import {CarouselModule} from '@coreui/angular';
 import {CommonModule} from "@angular/common";
-// import {CarouselModule} from "@coreui/coreui/scss/coreui";
 
 @Component({
   selector: 'app-main-page',
@@ -10,15 +9,15 @@ import {CommonModule} from "@angular/common";
   imports: [
     RouterLink,
     CarouselModule,
-    CommonModule
+    CommonModule,
   ],
   templateUrl: './main-page.component.html',
   styleUrl: './main-page.component.css'
 })
 export class MainPageComponent implements OnInit {
-  slides: any[] = new Array(3).fill({id: -1, src: '', title: '', subtitle: ''});
+  slides: any[] = new Array(4).fill({id: -1, src: '', title: '', subtitle: '', ref:''});
 
-  constructor() {
+  constructor(private router: Router) {
     const hamburger = document.getElementById('hamburger');
     const navLinks = document.querySelector('.nav-links');
 
@@ -34,32 +33,39 @@ export class MainPageComponent implements OnInit {
       id: 0,
       src: './assets/pictures/bluelemonade.jpg',
       title: 'Welcome',
-      subtitle: 'Thank you for allowing us to help you an your author journey!'
+      subtitle: 'Thank you for allowing us to help you an your author journey!',
+      ref:'/',
     };
     this.slides[1] = {
       id: 1,
       src: './assets/pictures/toast.jpg',
       title: 'Your work',
-      subtitle: 'Have all your work in one place!'
+      subtitle: 'Have all your work in one place!',
+      ref:'/work',
     };
     this.slides[2] = {
       id: 2,
       src: './assets/pictures/toopink.jpg',
       title: 'Offers',
-      subtitle: 'Get offers to publish your work!'
+      subtitle: 'Get offers to publish your work!',
+      ref:'/offers',
     };
     this.slides[3] = {
       id: 3,
-      src: './assets/pictures/bowl.jpg',
+      src: './assets/pictures/juicyccake.jpg',
       title: 'Forums',
-      subtitle: 'Talk to other artists about your interests!'
+      subtitle: 'Talk to other artists about your interests!',
+      ref:'/forums',
     };
 
   }
-
   activeSlide = 0;
+
   onItemChange(index: number) {
     this.activeSlide = index;
   }
 
+  navigateTo(ref: string) {
+    this.router.navigate([ref]);
+  }
 }
