@@ -11,8 +11,6 @@ const port = 3532;
 app.use(cors());
 app.use(express.json());
 
-
-// Load service account credentials
 const serviceAccount = require('./serviceAccountKey.json');
 
 admin.initializeApp({
@@ -123,18 +121,31 @@ app.delete('/api/peeps/:id', async (req, res) => {
 });
 
 
-//files stuff
+//TODO: check FILES STUFF
 app.get('/api/user_files', async (req, res) => {
   try {
-    console.log("here");
     const snapshot = await db.collection('user_files').get();
-    const files = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-    res.json(files);
+    const books = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    res.json(books);
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
   }
 });
+
+app.get('/api/user_files/:email', async (req, res) => {
+  try {
+    // console.log("here");
+    const snapshot = await db.collection('user_files').get();
+    const user_files = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    res.json(user_files);
+    // console.log(files);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 
 //TODO: check FILES STUFF
 app.post('api/user_files',async (req, res)=>{

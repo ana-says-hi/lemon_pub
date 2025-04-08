@@ -29,4 +29,39 @@ export class AddBookDialogComponent {
   generateSummary() {
 
   }
+
+  fileBrowserHandler(event: Event) {
+    const files = (event.target as HTMLInputElement).files;
+    if (files) {
+      this.handleFiles(files);
+    }
+  }
+
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    // Optional: Add CSS class to highlight the dropzone
+  }
+
+  onDragLeave(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    // Optional: Remove CSS class
+  }
+
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (event.dataTransfer?.files.length) {
+      this.handleFiles(event.dataTransfer.files);
+    }
+  }
+
+  handleFiles(files: FileList) {
+    Array.from(files).forEach(file => {
+      console.log('File dropped:', file.name);
+      // Handle the file (e.g., upload it, display preview, etc.)
+    });
+  }
 }

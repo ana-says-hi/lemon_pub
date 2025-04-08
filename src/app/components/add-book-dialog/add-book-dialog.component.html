@@ -3,10 +3,13 @@
 <div class="dialog-header">
   <h2>Add a New Book</h2>
 </div>
+
 <!--<hr>-->
+<div class="dialog-body">
+<div class="left-panel">
 <form>
   <label>Book Title:</label>
-  <input type="text" [(ngModel)]="newBook.bookTitle">
+  <input type="text" [(ngModel)]="newBook.book_title">
   <br>
 
   <label>Description:</label>
@@ -17,10 +20,9 @@
 <!--  <label>File Type:</label>-->
 <!--  <input type="text" [(ngModel)]="newBook.fileType">-->
 <!--  <br>-->
-
   <div class="form-row">
     <label>File Type:</label>
-    <select id="fileType" [(ngModel)]="newBook.fileType">
+    <select id="fileType" [(ngModel)]="newBook.file_type">
       <option value="pdf">PDF</option>
       <option value="txt">TXT</option>
       <option value="word">Word Document</option>
@@ -36,4 +38,18 @@
     <button mat-button (click)="closeDialog()">Cancel</button>
   </div>
 </form>
+</div>
+<div class="right-panel">
+  <div class="dropzone"
+       (dragover)="onDragOver($event)"
+       (dragleave)="onDragLeave($event)"
+       (drop)="onDrop($event)">
+<!--    <img src="">-->
+    <h2> Drag and dropfile here</h2>
+    <h2> or </h2>
+    <input type="file" id="fileDropRef" multiple (change)="fileBrowserHandler($event)"/>
+<!--    <label for="fileDropRef">Browse files</label>-->
+  </div>
+</div>
+</div>
 </body>

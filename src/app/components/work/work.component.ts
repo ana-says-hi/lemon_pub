@@ -1,10 +1,11 @@
-import {Component} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChildren} from '@angular/core';
 import {FilesServiceService} from "../../services/user_files/files-service.service";
 import {UserFile} from "../../model/user_file";
 import {CommonModule} from '@angular/common';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {AddBookDialogComponent} from "../add-book-dialog/add-book-dialog.component";
 import {reload} from "@angular/fire/auth";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-work',
@@ -13,31 +14,58 @@ import {reload} from "@angular/fire/auth";
   templateUrl: './work.component.html',
   styleUrl: './work.component.css'
 })
-export class WorkComponent {
-  books: UserFile[] = [];
-
+export class WorkComponent implements OnInit {
+  books: UserFile[] =[];//= new Observable<UserFile[]>();
+  // showMore: boolean = false;
+  showMore: boolean[] = [];
   constructor(private filesService: FilesServiceService, private dialog: MatDialog) {
-    this.books=this.filesService.books;
-    let book1 = new UserFile("admin@email.com", "The Great Gatsby", "A book about bloo bli bli", "pdf");
-    this.books.push(book1);
+  }
+
+  ngOnInit(): void {
+    this.filesService.getFiles().subscribe((data) => {
+      this.books = data;
+    });
+    // console.log(this.books);
   }
 
   addBook() {
     const dialogRef = this.dialog
       .open(AddBookDialogComponent, {
-        // width: '600px',
-        width: '700px',
         height: '500px',
-        // maxHeight: '90vh',
-        panelClass: 'custom-dialog-container'
+        minWidth:'700px'
+        //panelClass: 'custom-dialog-container'
       });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.books.push(result);
+        //this.books.subscribe(result);
+        //TODO ADD BOOK PRIN SERVICE
         console.log('Book added:', result);
         //window.location.reload();
       }
     });
   }
+
+  getFileTypeIcon(type: string): string {
+    console.log(type);
+    switch(type) {
+      case 'pdf':
+        return 'assets/icons-ish/pdf.png';
+      case 'txt':
+        return 'assets/icons-ish/txt.png';
+      case 'word':
+        return 'assets/icons-ish/word.png';
+      default:
+        return 'assets/icons-ish/document.png';
+    }
+  }
+
+  toggleReadMore(index: number): void {
+    this.showMore[index] = !this.showMore[index];
+  }
+
+  // toggleReadMore() {
+  //   this.showMore = !this.showMore;
+  // }
+
 }

@@ -1,20 +1,38 @@
 <body>
 <p>work works!</p>
-<!--puse orizontal chestiile de aici+ seee more daca e mai lunga descrierea-->
-
-<button class="btn" (click)="addBook()" >Add work</button>
+<button (click)="addBook()" >Add work</button>
 
 
 <!--asta daca e lista goala-->
 <p class="nothing"> Nothing to see here yet. Add your first work!</p>
 
-<div *ngFor="let book of books" class="book">
-  <img alt="cover" src="https://images.unsplash.com/photo-1556740739-887f6717d7e4?ixi"/>
+<div *ngFor="let book of books; let i = index" class="book">
+  <img
+    alt="cover" src="assets/icons-ish/wiwiwi.jpeg" class="cover"/>
   <div class="book-info">
-    <h3>{{ book.bookTitle }}</h3>
-    <p>{{ book.description }}</p>
+    <h3>{{ book.book_title }}</h3>
+<!--    <p class="description" [class.expanded]="showMore">-->
+<!--      {{ book.description }}-->
+<!--    </p>-->
+<!--    <button (click)="toggleReadMore()">Read {{ showMore ? 'Less ↑' : 'More ↓' }}</button>-->
+
+<!--    <p>{{ book.description }}</p>-->
+<!--    <p *ngIf="!showMore">{{ book.description.slice(0, 150) }}...</p>-->
+<!--    <p *ngIf="showMore">{{ book.description }}</p>-->
+
+    <div class="description-wrapper" [class.expanded]="showMore[i]">
+      <p class="description">{{ book.description }}</p>
+      <div class="fade-out" *ngIf="!showMore[i]"></div>
+    </div>
+    <button class="read-more" (click)="toggleReadMore(i)">Read {{ showMore[i] ? 'Less &uarr;' : 'More &darr;' }}</button>
+
   </div>
-  <img alt="file_type">
+  <img [src]="getFileTypeIcon(book.file_type)" alt="file-type" class="file-type-icon"/>
+
+<!--  sources for the pics:
+files="https://www.flaticon.com/free-icons/files-and-folders"
+-->
+
 </div>
 </body>
 

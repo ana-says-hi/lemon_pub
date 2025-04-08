@@ -1,18 +1,21 @@
 export class UserFile {
   //fileID: string;
   userEmail: string;
-  bookTitle: string;
+  book_title: string;
   description: string;
-  fileType: string;
-  //timestamp:string;
+  file_type: string;
+  timestamp:string;
+  storage_link: string;
   visibility: boolean;
 
 //! THIS IS JUST FOR TESTING
   constructor(userEmail: string, bookTitle: string, description: string, fileType: string) {
     this.userEmail=userEmail;
-    this.bookTitle = bookTitle;
+    this.book_title = bookTitle;
     this.description = description;
-    this.fileType = fileType;
+    this.file_type = fileType;
     this.visibility = true;
+    this.timestamp = new Date().toISOString();
+    this.storage_link=""; //TODO SCHIMBAT ASTA
   }
 }
