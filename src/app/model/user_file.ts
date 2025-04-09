@@ -9,12 +9,12 @@ export class UserFile {
   visibility: boolean;
 
 //! THIS IS JUST FOR TESTING
-  constructor(userEmail: string, bookTitle: string, description: string, fileType: string) {
+  constructor(userEmail: string, bookTitle: string, description: string, fileType: string, visibility: boolean) {
     this.userEmail=userEmail;
     this.book_title = bookTitle;
     this.description = description;
     this.file_type = fileType;
-    this.visibility = true;
+    this.visibility = visibility;
     this.timestamp = new Date().toISOString();
     this.storage_link=""; //TODO SCHIMBAT ASTA
   }

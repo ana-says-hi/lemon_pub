@@ -18,11 +18,13 @@ export class WorkComponent implements OnInit {
   books: UserFile[] =[];//= new Observable<UserFile[]>();
   // showMore: boolean = false;
   showMore: boolean[] = [];
+  email: string = localStorage.getItem('user_email') || '';
   constructor(private filesService: FilesServiceService, private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
-    this.filesService.getFiles().subscribe((data) => {
+    //this.filesService.getFiles().subscribe((data) => {
+    this.filesService.getFileByUserEmail(this.email).subscribe((data) => {
       this.books = data;
     });
     // console.log(this.books);
@@ -37,9 +39,11 @@ export class WorkComponent implements OnInit {
       });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result) {
+      if (result)
+      {
         //this.books.subscribe(result);
         //TODO ADD BOOK PRIN SERVICE
+        this.filesService.addFile(result);
         console.log('Book added:', result);
         //window.location.reload();
       }
@@ -47,7 +51,7 @@ export class WorkComponent implements OnInit {
   }
 
   getFileTypeIcon(type: string): string {
-    console.log(type);
+    // console.log(type);
     switch(type) {
       case 'pdf':
         return 'assets/icons-ish/pdf.png';

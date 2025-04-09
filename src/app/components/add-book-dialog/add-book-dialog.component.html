@@ -4,17 +4,19 @@
   <h2>Add a New Book</h2>
 </div>
 
+<!--TODO DACA A FOST ADAUGAT FIISER, SA FIE ALTA POZZA - submitted -->
+
 <!--<hr>-->
 <div class="dialog-body">
 <div class="left-panel">
 <form>
   <label>Book Title:</label>
-  <input type="text" [(ngModel)]="newBook.book_title">
+  <input type="text" [(ngModel)]="newBook.book_title" name="newBook.book_title" required>
   <br>
 
   <label>Description:</label>
 <!--  <button (click)="generateSummary()">Generate Summary with AI</button>-->
-  <textarea [(ngModel)]="newBook.description"></textarea>
+  <textarea [(ngModel)]="newBook.description" name="newBook.description"></textarea>
   <br>
 
 <!--  <label>File Type:</label>-->
@@ -22,14 +24,14 @@
 <!--  <br>-->
   <div class="form-row">
     <label>File Type:</label>
-    <select id="fileType" [(ngModel)]="newBook.file_type">
+    <select id="fileType" [(ngModel)]="newBook.file_type" name="newBook.file_type">
       <option value="pdf">PDF</option>
       <option value="txt">TXT</option>
-      <option value="word">Word Document</option>
+      <option value="word">Word</option>
     </select>
 
     <label>Visibility:</label>
-    <input type="checkbox" [(ngModel)]="newBook.visibility">
+    <input type="checkbox" [(ngModel)]="newBook.visibility" name="newBook.visibility">
     <br>
   </div>
 
@@ -46,8 +48,9 @@
        (drop)="onDrop($event)">
 <!--    <img src="">-->
     <h2> Drag and dropfile here</h2>
+    <img src="assets/icons-ish/file.png" alt="Drag and Drop" class="drag-drop-image">
     <h2> or </h2>
-    <input type="file" id="fileDropRef" multiple (change)="fileBrowserHandler($event)"/>
+    <input type="file" id="fileDropRef" (change)="fileBrowserHandler($event)"/>
 <!--    <label for="fileDropRef">Browse files</label>-->
   </div>
 </div>

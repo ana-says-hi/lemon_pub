@@ -14,7 +14,7 @@ export class AddBookDialogComponent {
   newBook: UserFile;
 
   constructor(public dialogRef: MatDialogRef<AddBookDialogComponent>) {
-    this.newBook = new UserFile("", "", "", "");
+    this.newBook = new UserFile("", "", "", "", false);
     this.newBook.userEmail = localStorage.getItem('user_email') || "user_not_logged_in";
   }
 
@@ -24,10 +24,6 @@ export class AddBookDialogComponent {
 
   closeDialog() {
     this.dialogRef.close();
-  }
-
-  generateSummary() {
-
   }
 
   fileBrowserHandler(event: Event) {

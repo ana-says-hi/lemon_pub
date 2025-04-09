@@ -43,7 +43,7 @@ form {
   padding: 30px;
   /*width: 400px;*/
   /*border-radius: 10px;*/
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0px 8px rgba(0, 0, 0, 0.2);
 }
 
 label {
@@ -124,5 +124,28 @@ input[type="checkbox"] {
 
 .form-row select {
   margin-right: 20px;
+}
+
+.right-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+}
+
+.drag-drop-image{
+  width: 100%;
+  height: 200px;
+  border: 2px dashed #1F1C3F;
+  border-radius: 5px;
+  background-color: lightgoldenrodyellow;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  color: white;
 }
 
