@@ -97,6 +97,7 @@ export class RegisterPageComponent {
     } else {
       alert('Please fill in all required fields.');
     }
+    localStorage.setItem('user_email', this.form.value.user_email);
     this.router.navigate(['/']);
   }
 }

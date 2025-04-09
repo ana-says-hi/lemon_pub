@@ -21,8 +21,14 @@ exports.getFilesByEmail = async (req, res) => {
 };
 
 exports.createFile = async (req, res) => {
+  console.log('TRYING TO CREATE FILE');
   try {
+    console.log('Creating new file with data:', req.body);
+    console.log('Creating new file with data:', req.data);
+    console.log('Creating new file with data:', req.toString());
+    console.log('Creating new file with data:', req.params);
     const { userEmail, book_title, description, file_type, visibility, timestamp, storage_link } = req.body;
+
     if (!userEmail || !book_title || !description || !file_type || !visibility || !timestamp || !storage_link) {
       return res.status(400).json({ message: 'All fields are required' });
     }

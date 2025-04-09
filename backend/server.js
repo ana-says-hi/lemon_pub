@@ -6,9 +6,17 @@ const port = 3532;
 app.use(cors({
   origin: 'http://localhost:4200',
   methods: 'GET,POST,PUT,DELETE',
-  allowedHeaders: 'Content-Type,Authorization'
+  allowedHeaders: '*'
 }));
 app.use(express.json());
+
+// app.use((req, res, next) => {
+//   console.log('Request Method:', req.method);
+//   console.log('Request URL:', req.url);
+//   console.log('Request Headers:', req.headers);
+//   console.log('Request Body:', req.body);
+//   next(); // Pass control to the next middleware
+// });
 
 // Route registration
 app.use('/api/peeps', require('./routes/peeps'));
@@ -17,7 +25,6 @@ app.use('/api/user_files', require('./routes/userFiles'));
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
-
 
 // const authenticateUser = async (req, res, next) => {
 //   const token = req.headers.authorization?.split('Bearer ')[1];
@@ -151,16 +158,18 @@ app.listen(port, () => {
 //
 // //TODO: check FILES STUFF
 //
-// app.post('api/user_files', async (req, res) => {
-//   //res.status(200).send("POST received  wiwiwi!");
+
+//
+// app.post('/api/user_files',async (req, res)=>{
+//   console.log('Received request to add a new file');
 //   try {
-//     console.log('Received request body:', req.body);
-//
-//     const {userEmail, book_title, description, file_type, visibility, timestamp, storage_link} = req.body;
-//
-//     if (!userEmail || !book_title || !description || !file_type || !visibility || !timestamp || !storage_link) {
-//       return res.status(400).json({ message: 'All fields are required' });
-//     }
+//     const { userEmail,
+//       book_title,
+//       description,
+//       file_type,
+//       visibility,
+//       timestamp,
+//       storage_link } = req.body;
 //
 //     const newFile = {
 //       userEmail,
@@ -170,53 +179,19 @@ app.listen(port, () => {
 //       visibility,
 //       timestamp,
 //       storage_link
-//     }
+//     };
 //
-//     if (!userEmail) {
-//       return res.status(400).json({ message: 'userEmail is required' });
-//     }
-//     const id = book_title + '_' + userEmail;
-//     const docRef = await db.collection('user_files').doc(id).set(newFile);
-//     res.json({id: id, ...newFile});
+//     const docId = book_title+'_'+userEmail;
+//     //const docRef = await db.collection('user_files').add(newFile);
+//     const docRef = await db.collection('user_files').doc(docId).set(newFile);
+//     res.json({ id: docId, ...newFile });
+//     console.log('File added:', newFile);
 //   } catch (err) {
 //     console.error(err.message);
 //     res.status(500).send('Server Error');
 //   }
-// });
 //
-//
-// // app.post('api/user_files',async (req, res)=>{
-// //   console.log('Received request to add a new file');
-// //   try {
-// //     const { userEmail,
-// //       book_title,
-// //       description,
-// //       file_type,
-// //       visibility,
-// //       timestamp,
-// //       storage_link } = req.body;
-// //
-// //     const newFile = {
-// //       userEmail,
-// //       book_title,
-// //       description,
-// //       file_type,
-// //       visibility,
-// //       timestamp,
-// //       storage_link
-// //     };
-// //
-// //     const docId = book_title+'_'+userEmail;
-// //     //const docRef = await db.collection('user_files').add(newFile);
-// //     const docRef = await db.collection('user_files').doc(docId).set(newFile);
-// //     res.json({ id: docId, ...newFile });
-// //     console.log('File added:', newFile);
-// //   } catch (err) {
-// //     console.error(err.message);
-// //     res.status(500).send('Server Error');
-// //   }
-// //
-// // })
+// })
 //
 // app.listen(port, () => {
 //   console.log(`Server running on http://localhost:${port}`);

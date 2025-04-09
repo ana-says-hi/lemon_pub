@@ -43,8 +43,15 @@ export class WorkComponent implements OnInit {
       {
         //this.books.subscribe(result);
         //TODO ADD BOOK PRIN SERVICE
-        this.filesService.addFile(result);
-        console.log('Book added:', result);
+        this.filesService.addFile(result).subscribe({
+          next: (response) => {
+            console.log('File added successfully:', response);
+          },
+          error: (err) => {
+            console.error('Error occurred while adding file:', err);
+          }
+        });
+
         //window.location.reload();
       }
     });

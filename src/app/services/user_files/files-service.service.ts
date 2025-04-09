@@ -32,26 +32,14 @@ export class FilesServiceService {
     return this.httpClient.get<UserFile[]>(`${this.apiUrl}/${email}`)
   }
 
-  addFile(file: UserFile): Observable<UserFile> {
-    console.log("ADD FROM SERVICE");
-    // return this.httpClient.post<UserFile>(this.apiUrl, file)
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-
-    console.log('File to be added:', file);
-    console.log('API URL:', this.apiUrl);
-
-    //return this.httpClient.post<UserFile>(this.apiUrl, file);
-
-    return this.httpClient.post<UserFile>(this.apiUrl, file, { headers }).pipe(
-      tap(response => {
-        console.log('File successfully added:', response);
-      }),
-      catchError(error => {
-        console.error('Error adding file:', error);
-        return throwError(() => error);
-      })
-    );
-
-  }
+addFile(file: UserFile): Observable<UserFile> {
+  return this.httpClient.post<UserFile>(this.apiUrl, file).pipe(
+    tap(() => console.log('File successfully sent to the backend:', file)),
+    catchError(error => {
+      console.error('Error adding file:', error);
+      return throwError(() => new Error('Failed to add file. Please try again later.'));
+    })
+  );
+}
 
 }
