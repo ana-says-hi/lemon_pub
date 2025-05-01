@@ -2,6 +2,8 @@ import {Component} from '@angular/core';
 import {UserFile} from "../../model/user_file";
 import {MatDialogRef} from "@angular/material/dialog";
 import {FormsModule} from "@angular/forms";
+import {StorageService} from "../../services/file_storage/storage.service";
+
 
 @Component({
   selector: 'app-add-book-dialog',
@@ -12,13 +14,17 @@ import {FormsModule} from "@angular/forms";
 })
 export class AddBookDialogComponent {
   newBook: UserFile;
+  isUploading: boolean = false;
 
-  constructor(public dialogRef: MatDialogRef<AddBookDialogComponent>) {
-    this.newBook = new UserFile("", "", "", "", false);
+  constructor(public dialogRef: MatDialogRef<AddBookDialogComponent>,
+              private storageService: StorageService
+  ) {
+    this.newBook = new UserFile("", "", false, "");
     this.newBook.userEmail = localStorage.getItem('user_email') || "user_not_logged_in";
   }
 
   saveBook() {
+    alert("Book saved:"+ this.newBook.book_title);
     this.dialogRef.close(this.newBook);
   }
 
@@ -28,8 +34,8 @@ export class AddBookDialogComponent {
 
   fileBrowserHandler(event: Event) {
     const files = (event.target as HTMLInputElement).files;
-    if (files) {
-      this.handleFiles(files);
+    if (files && files.length > 0) {
+      this.uploadFile(files[0]);
     }
   }
 
@@ -50,14 +56,24 @@ export class AddBookDialogComponent {
     event.stopPropagation();
 
     if (event.dataTransfer?.files.length) {
-      this.handleFiles(event.dataTransfer.files);
+      this.uploadFile(event.dataTransfer.files[0]);
     }
   }
 
-  handleFiles(files: FileList) {
-    Array.from(files).forEach(file => {
-      console.log('File dropped:', file.name);
-      // Handle the file (e.g., upload it, display preview, etc.)
-    });
+  private uploadFile(file: File) {
+    this.isUploading = true;
+    this.storageService.uploadFile(file, this.newBook.userEmail, this.newBook.book_title)
+      .subscribe({
+        next: (url) => {
+          this.newBook.storage_link = url;
+          this.isUploading = false;
+          console.log('File uploaded successfully:', url);
+        },
+        error: (err) => {
+          console.error('Error uploading file:', err);
+          this.isUploading = false;
+        },
+      });
+    this.newBook.storage_link = this.storageService.getFileURL();
   }
 }

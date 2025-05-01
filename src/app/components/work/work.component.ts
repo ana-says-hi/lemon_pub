@@ -15,10 +15,11 @@ import {Observable} from "rxjs";
   styleUrl: './work.component.css'
 })
 export class WorkComponent implements OnInit {
-  books: UserFile[] =[];//= new Observable<UserFile[]>();
+  books: UserFile[] = [];//= new Observable<UserFile[]>();
   // showMore: boolean = false;
   showMore: boolean[] = [];
   email: string = localStorage.getItem('user_email') || '';
+
   constructor(private filesService: FilesServiceService, private dialog: MatDialog) {
   }
 
@@ -34,21 +35,18 @@ export class WorkComponent implements OnInit {
     const dialogRef = this.dialog
       .open(AddBookDialogComponent, {
         height: '500px',
-        minWidth:'700px'
+        minWidth: '700px'
         //panelClass: 'custom-dialog-container'
       });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result)
-      {
-        //this.books.subscribe(result);
-        //TODO ADD BOOK PRIN SERVICE
+      if (result) {
         this.filesService.addFile(result).subscribe({
           next: (response) => {
-            console.log('File added successfully:', response);
+            console.log('File meta added successfully:', response);
           },
           error: (err) => {
-            console.error('Error occurred while adding file:', err);
+            console.error('Error occurred while adding file meta:', err);
           }
         });
 
@@ -59,7 +57,7 @@ export class WorkComponent implements OnInit {
 
   getFileTypeIcon(type: string): string {
     // console.log(type);
-    switch(type) {
+    switch (type) {
       case 'pdf':
         return 'assets/icons-ish/pdf.png';
       case 'txt':

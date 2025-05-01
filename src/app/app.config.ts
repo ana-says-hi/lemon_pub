@@ -15,10 +15,12 @@ import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFireAuth, AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {BrowserModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    importProvidersFrom(BrowserModule, BrowserAnimationsModule),
+    importProvidersFrom(BrowserModule, BrowserAnimationsModule,
+      AngularFireStorageModule, AngularFireAuth, AngularFireModule),
     provideZoneChangeDetection({eventCoalescing: true}),
     provideRouter(routes, withComponentInputBinding()),
     provideHttpClient(),

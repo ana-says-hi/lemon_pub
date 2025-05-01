@@ -1,9 +1,6 @@
 import {Component, inject} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {Router, RouterLink} from "@angular/router";
-import {AuthService} from "../../services/auth/auth.service";
-import {signInWithEmailAndPassword} from "@angular/fire/auth";
-import {getAuth} from "firebase/auth";
 import {PeopleServiceService} from "../../services/peeps/people-service.service";
 import {User} from "../../model/user";
 

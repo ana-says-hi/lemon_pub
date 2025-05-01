@@ -3,13 +3,13 @@ import {AppComponent} from "./app/app.component";
 import {appConfig} from "./app/app.config";
 import {getApp, initializeApp} from "firebase/app";
 import {environment} from "./environments/environment";
-import {initializeAuth, browserLocalPersistence, provideAuth} from "@angular/fire/auth";
+import {provideAuth} from "@angular/fire/auth";
 import {getAuth} from "firebase/auth";
 import {provideFirebaseApp} from "@angular/fire/app";
 import {provideFirestore} from "@angular/fire/firestore";
 import {getFirestore} from "firebase/firestore";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {getStorage, provideStorage} from "@angular/fire/storage";
 
 // if (!getApps().length) {
 //   console.log("Initializing Firebase...");
@@ -21,14 +21,15 @@ bootstrapApplication(AppComponent, {
   providers: [
     provideFirebaseApp(() => app),
     provideAuth(() => getAuth(app)),
-    provideFirestore(() => getFirestore()),
+    provideFirestore(() => getFirestore(app)),
+    provideStorage(() => getStorage(app)),
     ...appConfig.providers, provideAnimationsAsync()
   ]
 }).catch(err => console.error(err));
 
-
 console.log("App initialized:", getApp());
-// console.log("Auth initialized:", getAuth());
+// console.log("Storage initialized", getStorage(app));
+// console.log("Auth initialized:", getAuth(app));
 
 // const app2 = initializeApp(environment.firebaseConfig);
 //

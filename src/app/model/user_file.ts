@@ -1,3 +1,5 @@
+// import Date from "$GLOBAL$";
+// import { Date } from "global";
 export class UserFile {
   //fileID: string;
   userEmail: string;
@@ -9,13 +11,13 @@ export class UserFile {
   visibility: boolean;
 
 //! THIS IS JUST FOR TESTING
-  constructor(userEmail: string, bookTitle: string, description: string, fileType: string, visibility: boolean) {
+  constructor(userEmail: string, bookTitle: string, visibility: boolean,description: string = "TODO: Add this later", fileType: string="default") {
     this.userEmail=userEmail;
     this.book_title = bookTitle;
     this.description = description;
     this.file_type = fileType;
     this.visibility = visibility;
     this.timestamp = new Date().toISOString();
-    this.storage_link=""; //TODO SCHIMBAT ASTA
+    this.storage_link="default"; //TODO SCHIMBAT ASTA
   }
 }

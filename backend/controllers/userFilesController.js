@@ -21,18 +21,11 @@ exports.getFilesByEmail = async (req, res) => {
 };
 
 exports.createFile = async (req, res) => {
-  console.log('TRYING TO CREATE FILE');
   try {
-    console.log('Creating new file with data:', req.body);
-    console.log('Creating new file with data:', req.data);
-    console.log('Creating new file with data:', req.toString());
-    console.log('Creating new file with data:', req.params);
     const { userEmail, book_title, description, file_type, visibility, timestamp, storage_link } = req.body;
-
-    if (!userEmail || !book_title || !description || !file_type || !visibility || !timestamp || !storage_link) {
-      return res.status(400).json({ message: 'All fields are required' });
-    }
-
+    // if (!userEmail || !book_title || !description || !file_type || !visibility || !timestamp || !storage_link) {
+    //   return res.status(400).json({ message: 'All fields are required' });
+    // }
     const id = `${book_title}_${userEmail}`;
     const newFile = { userEmail, book_title, description, file_type, visibility, timestamp, storage_link };
     await db.collection('user_files').doc(id).set(newFile);
@@ -41,3 +34,16 @@ exports.createFile = async (req, res) => {
     res.status(500).send('Server Error');
   }
 };
+
+exports.updateFile = async (req, res) => {
+  try {
+    const { userEmail, book_title, description, file_type, visibility, timestamp, storage_link } = req.body;
+    const id = `${book_title}_${userEmail}`;
+
+    const updatedFile = { userEmail, book_title, description, file_type, visibility, timestamp, storage_link };
+    await db.collection('user_files').doc(id).set(updatedFile);
+    res.json({ id, ...updatedFile });
+  } catch (err) {
+    res.status(500).send('Server Error');
+  }
+}
