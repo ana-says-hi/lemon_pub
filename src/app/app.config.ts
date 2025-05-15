@@ -20,7 +20,7 @@ import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 export const appConfig: ApplicationConfig = {
   providers: [
     importProvidersFrom(BrowserModule, BrowserAnimationsModule,
-      AngularFireStorageModule, AngularFireAuth, AngularFireModule),
+      AngularFireStorageModule, AngularFireAuth, AngularFireModule.initializeApp(environment.firebaseConfig),),
     provideZoneChangeDetection({eventCoalescing: true}),
     provideRouter(routes, withComponentInputBinding()),
     provideHttpClient(),
@@ -29,7 +29,5 @@ export const appConfig: ApplicationConfig = {
     // importProvidersFrom(AngularFireModule.initializeApp(environment.firebaseConfig),
     //   AngularFireAuthModule),
     // provideAuth(() => getAuth(getApp())),
-
-    // provideStorage(() => getStorage()), provideFirebaseApp(() => initializeApp({"projectId":"lemons-24438","appId":"1:777735442779:web:89692fee8dd4e54b928a7e","databaseURL":"https://lemons-24438-default-rtdb.firebaseio.com","storageBucket":"lemons-24438.firebasestorage.app","apiKey":"AIzaSyC5bPqO7pnKo9SyKIdh-Pw5zDU6DQJb4nI","authDomain":"lemons-24438.firebaseapp.com","messagingSenderId":"777735442779","measurementId":"G-Z7PKPWLFDH"})), provideAuth(() => getAuth()), provideFirestore(() => getFirestore()), provideStorage(() => getStorage()),
   ]
 };

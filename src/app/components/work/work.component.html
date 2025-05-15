@@ -12,15 +12,6 @@
     alt="cover" src="assets/icons-ish/wiwiwi.jpeg" class="cover"/>
   <div class="book-info">
     <h3>{{ book.book_title }}</h3>
-<!--    <p class="description" [class.expanded]="showMore">-->
-<!--      {{ book.description }}-->
-<!--    </p>-->
-<!--    <button (click)="toggleReadMore()">Read {{ showMore ? 'Less ↑' : 'More ↓' }}</button>-->
-
-<!--    <p>{{ book.description }}</p>-->
-<!--    <p *ngIf="!showMore">{{ book.description.slice(0, 150) }}...</p>-->
-<!--    <p *ngIf="showMore">{{ book.description }}</p>-->
-
     <div class="description-wrapper" [class.expanded]="showMore[i]">
       <p class="description">{{ book.description }}</p>
       <div class="fade-out" *ngIf="!showMore[i]"></div>
