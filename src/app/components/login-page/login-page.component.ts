@@ -36,7 +36,7 @@ export class LoginPageComponent {
     console.log(user);
 
     if (user != null) {
-      if (user.password === this.password) {
+      if (user.password == this.password) {
         console.log('User found');
         // localStorage.setItem('user_email', user.toString());
         localStorage.setItem('user_email', user.email);
@@ -47,7 +47,7 @@ export class LoginPageComponent {
     } else {
       user = this.peopleService.getUserByUsername(this.mail_username);
       if (user != null) {
-        if (user.password === this.password) {
+        if (user.password == this.password) {
           console.log('User found');
           // localStorage.setItem('user_email', user.toString());
           localStorage.setItem('user_email', user.email);
@@ -55,8 +55,10 @@ export class LoginPageComponent {
 
           this.router.navigate(['/profile']);
         }
-      } else
-        console.log('User not found');
+      }
+      console.log('User not found');
+      alert('Credentials are not correct or missing. PLease try again.')
+
     }
   }
 
