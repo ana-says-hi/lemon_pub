@@ -27,6 +27,7 @@
     "@google/generative-ai": "^0.24.0",
     "@xenova/transformers": "^2.17.2",
     "cors": "^2.8.5",
+    "cytoscape": "^3.32.0",
     "firebase": "^11.6.0",
     "firebase-admin": "^13.2.0",
     "firebase-tools": "^13.34.0",

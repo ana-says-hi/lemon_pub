@@ -21,11 +21,19 @@ exports.createPeep = async (req, res) => {
   }
 };
 
-exports.getPeepById = async (req, res) => {
+exports.getPeepByEmail= async (req, res) => {
   try {
-    const doc = await db.collection('peeps').doc(req.params.id).get();
-    if (!doc.exists) return res.status(404).json({ message: 'User not found' });
-    res.json({ id: doc.id, ...doc.data() });
+    console.log('getPeepByEmail called');
+    const email = req.params.email;
+    const doc = await db.collection('peeps')
+      .where('email', '==', email)
+      // .limit(1)
+      .get();
+    // console.log('Query executed');
+    // console.log('Number of documents found:', doc.docs.length);
+    if (doc.docs.length===0) return res.status(404).json({ message: 'User not found' });
+    const doc1 = doc.docs[0];
+    res.json({ id: doc1.id, ...doc1.data() });
   } catch (err) {
     res.status(500).send('Server Error');
   }

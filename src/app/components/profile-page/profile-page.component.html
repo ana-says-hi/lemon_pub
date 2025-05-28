@@ -1,53 +1,32 @@
-<p>profile-page works!</p>
-
+<body>
 <div class="profile-header">
-  <img src="assets/images/cover.jpg" alt="cover" class="cover-image">
+<!--  <img src="assets/images/cover.jpg" alt="cover" class="cover-image">-->
+  <div>
   <div class="profile-info">
     <img src="assets/images/profile.jpg" alt="profile" class="profile-image">
-    <h1>Name</h1>
+    <p id="user_name">&#64;{{this.user?.username}}</p>
+    <p id="user_type">&#35;{{this.user?.user_type}}</p>
   </div>
+  <button id="settings"> settings </button>
 </div>
 
 <div class="profile-content">
-  <div class="folower-status">
-    <div class="followers">
-      <h2>Followers:</h2>
-      <div class="follow-pics">
-        <div class="follow-pic">
-          <img src="assets/images/profile.jpg" alt="profile">
-        </div>
-      </div>
-    </div>
-    <div class="following">
-      <h2>Following:</h2>
-      <div class="follow-pics">
-        <div class="follow-pic">
-          <img src="assets/images/profile.jpg" alt="profile">
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div class="description">
-    <button class="edit-button">Edit Profile</button>
     <h2>Description:</h2>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, voluptate, voluptatem,
       voluptas quae quia
     </p>
   </div>
 
-  <div class="user-posts">
-<!--    idk daca sa adaug aici si iar user works pt ca s-ar repeta-->
-    <div class="review">
-      <div class="review_header">
-        <div class="stars">
-          ##### stars
-        </div>
-        <h2>thing the review is for</h2>
-      </div>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, voluptate, voluptatem,
-        voluptas quae quia
-      </p>
-    </div>
+
+  <div class="genres">
+    <h2>Genres:</h2>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam, quod, voluptate, voluptatem,
+      voluptas quae quia
+    </p>
   </div>
+
+  <button class="edit-button">Edit Profile</button>
 </div>
+</div>
+</body>

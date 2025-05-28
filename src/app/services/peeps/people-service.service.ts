@@ -20,8 +20,9 @@ export class PeopleServiceService {
     return this.httpClient.get<User[]>(this.apiUrl)
   }
 
-  getUserById(id: number): Observable<User> {
-    return this.httpClient.get<User>(this.apiUrl + id);
+  getUserByEmail(email: string): Observable<User> {
+    return this.httpClient.get<User>(`${this.apiUrl}/${email}`);
+    // return this.httpClient.get<User>(`/api/peeps/${encodeURIComponent(email)}`);
   }
 
   getUserByUsername(username: string) {
@@ -37,17 +38,18 @@ export class PeopleServiceService {
     //return id;
   }
 
-  getUserByEmail(email: string) {
-    // let id=-1;
-    for (let user of this.users) {
-      if (user.email == email) {
-        //id = user.id;
-        return user;
-      }
-    }
-    return null;
-    // return id;
-  }
+  // getUserByEmail(email: string): User | null {
+  //   // let id=-1;
+  //   for (let user of this.users) {
+  //     if (user.email == email) {
+  //       //id = user.id;
+  //       console.log("here");
+  //       return user;
+  //     }
+  //   }
+  //   return null;
+  //   // return id;
+  // }
 
   addUser(user: User)//:Observable<User>{
   {

@@ -31,6 +31,7 @@ export class RegisterPageComponent {
       user_phoneNr: [''],
       user_email: ['', [Validators.required, Validators.email]],
       username: ['', Validators.required],
+      user_type: ['user'],
       password: ['', Validators.required],
       passwordConfirm: ['', Validators.required]
     });
@@ -67,7 +68,8 @@ export class RegisterPageComponent {
         this.form.value.user_lastName as string,
         this.form.value.user_phoneNr as string,
         false,
-        'user',
+        this.form.value.user_email as string,
+        // 'user',
         this.form.value.password as string
       );
 
@@ -98,6 +100,7 @@ export class RegisterPageComponent {
       alert('Please fill in all required fields.');
     }
     localStorage.setItem('user_email', this.form.value.user_email);
+    localStorage.setItem('user_type', this.form.value.user_type);
     this.router.navigate(['/']);
   }
 }

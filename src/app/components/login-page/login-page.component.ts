@@ -3,6 +3,7 @@ import {FormsModule} from "@angular/forms";
 import {Router, RouterLink} from "@angular/router";
 import {PeopleServiceService} from "../../services/peeps/people-service.service";
 import {User} from "../../model/user";
+import {firstValueFrom} from "rxjs";
 
 
 @Component({
@@ -27,19 +28,24 @@ export class LoginPageComponent {
     console.log('constructor_log');
   }
 
-  loginUser() {
+  async loginUser() {
     console.log('loginUser_log');
     console.log(this.mail_username);
 
     let user: User | null;
-    user = this.peopleService.getUserByEmail(this.mail_username);
-    console.log(user);
+    user = await firstValueFrom(this.peopleService.getUserByEmail(this.mail_username));
+    //user = this.peopleService.getUserByEmail(this.mail_username);
+    // this.peopleService.getUserByEmail(this.mail_username).subscribe((data) => {
+    //   user = data;
+    // });
+    // console.log(user);
 
     if (user != null) {
       if (user.password == this.password) {
         console.log('User found');
         // localStorage.setItem('user_email', user.toString());
         localStorage.setItem('user_email', user.email);
+        localStorage.setItem('user_type', user.user_type);
         // localStorage.setItem('user_email', user.username);
 
         this.router.navigate(['/profile']);
@@ -51,6 +57,7 @@ export class LoginPageComponent {
           console.log('User found');
           // localStorage.setItem('user_email', user.toString());
           localStorage.setItem('user_email', user.email);
+          localStorage.setItem('user_type', user.user_type);
           // localStorage.setItem('user_email', user.username);
 
           this.router.navigate(['/profile']);

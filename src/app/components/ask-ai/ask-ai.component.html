@@ -1,0 +1,63 @@
+<body>
+<div class="warning">
+  <p>Make sure the description of the book is fitting when you generate a response by AI. The answer will be based on
+    the provided book description.
+    After changing the book description, please SAVE! The modifications will not be uploaded to the database if you do
+    not SAVE!
+    <br>
+    Help BERT find the right agent by mentioning if your book is FICTION or NON-FICTION! </p>
+</div>
+
+<div class="left-panel">
+  <p class="p_lable"> Select a book you would like to classsify.</p>
+  <select id="book_select" (change)="onBookChange()"
+          [(ngModel)]="selectedBook" name="selectedBook">
+    <ng-container *ngFor="let book of books">
+      <option [ngValue]="book">{{ book.book_title }}</option>
+    </ng-container>
+  </select>
+
+  <p class="p_lable">Select the language of your book</p>
+  <select id="language_select" [(ngModel)]="selectedLanguage" name="selectedLanguage">
+    <ng-container *ngFor="let language of languages">
+      <option [value]="language.value"> {{ language.viewValue }}</option>
+    </ng-container>
+  </select>
+
+  <div class="book-description">
+    <p class="p_lable">Book description</p>
+    <textarea id="book-desc-area" [(ngModel)]="selectedBookDescription"
+              name="selectedBookDescription"></textarea>
+  </div>
+  <button id="save" (click)="saveDescription()">Save</button>
+</div>
+
+<div class="right-panel">
+  <button (click)="matchDescription()">Generate response with BERT!</button>
+  <!--  <textarea id="ai-response-area"-->
+  <!--            name="resultedAgents"-->
+  <!--            rows="40"-->
+  <!--            cols="40"-->
+  <!--            [style.visibility]="showResponse ? 'visible' : 'hidden'"-->
+  <!--            [(ngModel)]="resultedAgents"-->
+  <!--  >-->
+  <!--  </textarea>-->
+  <div id="result-div">
+    <div *ngFor="let agent of resultedAgents" class="agent">
+      <p id="agent_name">{{agent.name}}</p>
+      <p>
+        {{agent.genres}}
+      </p>
+      <p>
+        <a [href]="agent.profileLink" target="_blank" rel="noopener noreferrer">
+          View Profile
+        </a>
+      </p>
+      <p id="similarity">{{agent.similarity}}</p>
+      <hr>
+    </div>
+  </div>
+
+  <!--<button>Generate response with Gemini!</button>-->
+</div>
+</body>

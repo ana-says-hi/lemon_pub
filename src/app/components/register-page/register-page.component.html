@@ -3,7 +3,7 @@
     <div class="form-container">
       <form [formGroup]="form">
         <div *ngIf="currentStep === 0">
-          <h2>Step 1: Personal Details</h2>
+          <h3>Step 1: Personal Details</h3>
 
           <label for="firstName">First Name:</label>
           <input id="firstName" formControlName="user_firstName"
@@ -20,15 +20,23 @@
           <label for="email">Email:</label>
           <input id="email" formControlName="user_email"
                  type="email" placeholder="Email" required/>
+
         </div>
 
         <!-- Step 2: Account Details -->
         <div *ngIf="currentStep === 1">
-          <h2>Step 2: Account Details</h2>
+          <h3>Step 2: Account Details</h3>
 
           <label for="username">Username:</label>
           <input id="username" formControlName="username"
                  type="text" placeholder="Username" required/>
+
+          <label for="user_type">User Type:</label>
+          <select id="user_type" formControlName="user_type" required>
+            <option value="" disabled selected>Select User Type</option>
+            <option value="writer">Writer</option>
+            <option value="agent">Agent/ Editor</option>
+          </select>
 
           <label for="password">Password:</label>
           <input id="password" formControlName="password"
