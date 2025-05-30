@@ -1,4 +1,5 @@
 <body>
+<div class="warpper-ask-ai">
 <div class="warning">
   <p>Make sure the description of the book is fitting when you generate a response by AI. The answer will be based on
     the provided book description.
@@ -60,4 +61,10 @@
 
   <!--<button>Generate response with Gemini!</button>-->
 </div>
+</div>
+
+<div class="graph-container">
+  <app-graph  *ngIf="graphInitialsation"></app-graph>
+</div>
+
 </body>

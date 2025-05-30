@@ -73,8 +73,4 @@ export class WorkComponent implements OnInit {
     this.showMore[index] = !this.showMore[index];
   }
 
-  // toggleReadMore() {
-  //   this.showMore = !this.showMore;
-  // }
-
 }

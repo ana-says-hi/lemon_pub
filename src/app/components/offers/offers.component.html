@@ -1,21 +1,54 @@
 <body>
-<p>offers works!</p>
 
-<button>Start a bid</button>
+<div>
+  Searchbar
+  <br>
+  Filter by genre, author
+</div>
 
-<hr>
-
-<p>See your offers right here: </p>
-
-<div class="book-offers">
-  <h3>Book Title</h3>
-
-  <div class="offer">
-    <p>Offered by: <span>John Doe</span></p>
-    <p>Price: <span>$10</span></p>
-    <button>Accept</button>
+<div class="agent-page">
+  <div *ngIf="!loading">
+    <div *ngFor="let book of books; let i = index" class="book-container">
+      <div class="button-container">
+        <button class="button" (click)="makeOffer(book)">Make offer.</button>
+        <button class="button">Talk to writer.</button>
+      </div>
+      <div class="book">
+      <img
+        alt="cover" src="assets/icons-ish/wiwiwi.jpeg" class="cover"/>
+      <div class="book-info">
+        <h3>{{ book.book_title }} - by {{book.userEmail}}</h3>
+        <div class="description-wrapper" [class.expanded]="showMore[i]">
+          <p class="description">{{ book.description }}</p>
+          <div class="fade-out" *ngIf="!showMore[i]"></div>
+        </div>
+        <button class="read-more" (click)="toggleReadMore(i)">
+          Read {{ showMore[i] ? 'Less &uarr;' : 'More &darr;' }}</button>
+      </div>
+    </div>
+    </div>
   </div>
 </div>
+
+
+<div class="writer-page">
+  <button class="button">Start a bid</button>
+
+  <hr>
+
+  <p>See your offers right here: </p>
+
+  <div class="book-offers">
+    <h3>Book Title</h3>
+
+    <div class="offer">
+      <p>Offered by: <span>John Doe</span></p>
+      <p>Price: <span>$10</span></p>
+      <button class="button">Accept</button>
+    </div>
+  </div>
+</div>
+
 
 </body>
 

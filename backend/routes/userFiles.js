@@ -6,6 +6,7 @@ router.get('/', controller.getAllFiles);
 router.get('/:email', controller.getFilesByEmail);
 router.post('/', controller.createFile);
 router.put('/:id', controller.updateFile);
+// router.put('/:id/:genres', controller.updateFileGenres);
 // router.post('/', (req, res, next) => {
 //   console.log('Request body in route:', req.body);
 //   next();

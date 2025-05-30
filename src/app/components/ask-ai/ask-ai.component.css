@@ -1,5 +1,13 @@
 body {
   padding: 20px;
+  /*display: flex;*/
+  /*flex-direction: column;*/
+}
+
+.warpper-ask-ai{
+  display: block;
+  flex-direction: column;
+  height: 100%;
 }
 
 .warning {
@@ -86,3 +94,11 @@ button:hover {
   font-size: 17px;
 }
 
+.graph-container{
+  /*display: flex;*/
+  justify-content: center;
+  margin-top: auto;
+  padding-bottom: 30px;
+  width: 75%;
+  /*height:85%*/
+}

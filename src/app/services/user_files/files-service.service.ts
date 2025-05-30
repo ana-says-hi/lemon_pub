@@ -55,4 +55,17 @@ export class FilesServiceService {
       })
     );
   }
+
+  updateFileGenres(file: UserFile, genres: String[]): Observable<UserFile> {
+    console.log('Updating genres for file:', file, 'with genres:', genres);
+    const updatedFile = {...file, genres: genres};
+    const id = file.book_title + '_' + file.userEmail;
+    return this.httpClient.put<UserFile>(`${this.apiUrl}/${id}`, updatedFile).pipe(
+      tap(() => console.log('File genres successfully updated:', updatedFile)),
+      catchError(error => {
+        console.error('Error updating file genres:', error);
+        return throwError(() => new Error('Failed to update file genres. Please try again later.'));
+      })
+    );
+  }
 }
