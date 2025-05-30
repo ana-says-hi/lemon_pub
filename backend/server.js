@@ -21,6 +21,7 @@ app.use(express.json());
 // Route registration
 app.use('/api/peeps', require('./routes/peeps'));
 app.use('/api/user_files', require('./routes/userFiles'));
+app.use('/api/bids', require('./routes/bids'));
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
