@@ -1,7 +1,7 @@
 import {Component, AfterViewInit, OnInit} from '@angular/core';
 import cytoscape from 'cytoscape';
-import {AiService} from "../services/ai/ai.service";
-import {Agent} from "../model/agent";
+import {AiService} from "../../services/ai/ai.service";
+import {Agent} from "../../model/agent";
 import {firstValueFrom} from "rxjs";
 
 @Component({

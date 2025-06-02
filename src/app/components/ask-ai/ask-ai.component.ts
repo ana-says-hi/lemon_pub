@@ -7,7 +7,7 @@ import {FilesServiceService} from "../../services/user_files/files-service.servi
 import {CommonModule} from "@angular/common";
 import {AiService} from "../../services/ai/ai.service";
 import {Agent} from "../../model/agent";
-import {GraphComponent} from "../../graph/graph.component";
+import {GraphComponent} from "../graph/graph.component";
 
 @Component({
   selector: 'app-ask-ai',

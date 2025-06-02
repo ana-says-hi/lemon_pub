@@ -23,7 +23,7 @@ exports.createPeep = async (req, res) => {
 
 exports.getPeepByEmail= async (req, res) => {
   try {
-    console.log('getPeepByEmail called');
+    // console.log('getPeepByEmail called');
     const email = req.params.email;
     const doc = await db.collection('peeps')
       .where('email', '==', email)

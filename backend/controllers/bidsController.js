@@ -34,3 +34,12 @@ exports.createBid  = async (req, res) => {
     res.status(500).send('Server Error');
   }
 };
+
+exports.updateBid = async (req, res) => {
+  try {
+    await db.collection('bids').doc(req.params.id).update(req.body);
+    res.json({ message: 'Bid updated' });
+  } catch (err) {
+    res.status(500).send('Server Error');
+  }
+};

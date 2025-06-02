@@ -52,13 +52,11 @@ exports.updateFileGenres = async (req, res) => {
   try {
     const {genres} = req.params;
     const id = req.params.id;
-
     // Fetch the existing file
     const fileDoc = await db.collection('user_files').doc(id).get();
     if (!fileDoc.exists) {
       return res.status(404).send('File not found');
     }
-
     // Update the genres field
     await db.collection('user_files').doc(id).update({genres: genres.split(',')});
 

@@ -1,0 +1,27 @@
+<body>
+
+<div class="dialog-header">
+  <h2>Make an offer</h2>
+</div>
+<!--<hr>-->
+<div class="dialog-body">
+  <div>
+      <p>Book Title: {{title}}</p>
+      <p>Author: {{newOffer.autor}}</p>
+
+      <label>The offer you would like to make to the author:</label>
+<!--      <input type="text" [(ngModel)]="">-->
+      <textarea [(ngModel)]="newOffer.offer" name="offerText" rows="4" cols="50"></textarea>
+      <br>
+      <label>Set an expiration date for your offer:</label>
+      <input type="date" [(ngModel)]="newOffer.expiration_date" name="expirationDate" required>
+
+      <div class="button-container">
+        <button mat-button (click)="saveOffer()">Make Offer</button>
+        <button mat-button (click)="closeDialog()">Cancel</button>
+      </div>
+
+  </div>
+</div>
+</body>
+

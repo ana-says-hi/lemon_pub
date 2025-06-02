@@ -5,3 +5,6 @@ const controller = require('../controllers/bidsController');
 router.get('/', controller.getAllBids);
 router.get('/:email', controller.getBidByUser);
 router.post('/', controller.createBid);
+router.put('/:id', controller.updateBid);
+
+module.exports = router;

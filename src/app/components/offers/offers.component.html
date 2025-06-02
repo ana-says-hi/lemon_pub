@@ -6,12 +6,12 @@
   Filter by genre, author
 </div>
 
-<div class="agent-page">
+<div class="agent-page"  *ngIf="!is_writer">
   <div *ngIf="!loading">
     <div *ngFor="let book of books; let i = index" class="book-container">
       <div class="button-container">
         <button class="button" (click)="makeOffer(book)">Make offer.</button>
-        <button class="button">Talk to writer.</button>
+        <button class="button" (click)="chat(book.userEmail)">Talk to writer.</button>
       </div>
       <div class="book">
       <img
@@ -31,12 +31,12 @@
 </div>
 
 
-<div class="writer-page">
+<div class="writer-page" *ngIf="is_writer">
+  <p>Make offers start flowing in by starting a bid! </p>
+
   <button class="button">Start a bid</button>
 
   <hr>
-
-  <p>See your offers right here: </p>
 
   <div class="book-offers">
     <h3>Book Title</h3>
