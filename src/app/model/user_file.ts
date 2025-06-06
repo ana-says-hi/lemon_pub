@@ -10,6 +10,7 @@ export class UserFile {
   storage_link: string;
   visibility: boolean;
   genres: string[] = [];
+  displayOwner?: string;
 
 //! THIS IS JUST FOR TESTING
   constructor(userEmail: string, bookTitle: string, visibility: boolean, description: string = "TODO: Add this later", fileType: string="default", genres: string[] = []) {

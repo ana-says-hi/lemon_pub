@@ -1,29 +1,23 @@
 <p>chat works!</p>
-<!--<div *ngFor="let msg of messages$ | async" class="message">-->
-<!--  <b>{{ msg.user }}:</b> {{ msg.text }}-->
-<!--</div>-->
-<!--<input [(ngModel)]="messageText" placeholder="Type a message" />-->
-<!--<button (click)="sendMessage()">Send</button>-->
-
-<div class="chat-toggle" (click)="toggleChat()">
-  💬 Chat
-</div>
-
-<!-- Chat Window -->
-<div class="chat-window" *ngIf="chatOpen">
-  <div class="chat-header">
-    Chat
-    <button (click)="toggleChat()">✖</button>
-  </div>
-
-  <div class="chat-messages">
-    <div *ngFor="let msg of messages$ | async">
-      <b>{{ msg.user }}:</b> {{ msg.text }}
+<!--<stream-chat>-->
+<!--  <stream-channel-list></stream-channel-list>-->
+<!--  <stream-channel>-->
+<!--    <stream-channel-header></stream-channel-header>-->
+<!--    <stream-message-list></stream-message-list>-->
+<!--    <stream-message-input></stream-message-input>-->
+<!--  </stream-channel>-->
+<!--</stream-chat>-->
+<div class="chat-container">
+  <div class="messages">
+    <div *ngFor="let msg of messages">
+      <strong>{{ msg.user.name }}:</strong> {{ msg.text }}
     </div>
   </div>
 
-  <div class="chat-input">
-    <input [(ngModel)]="messageText" placeholder="Type your message..." />
+  <div class="input">
+    <input [(ngModel)]="inputMessage" placeholder="Type your message..." />
     <button (click)="sendMessage()">Send</button>
   </div>
 </div>
+
+

@@ -7,6 +7,7 @@ import {PeopleServiceService} from "../../services/peeps/people-service.service"
 import {AddBookDialogComponent} from "../add-book-dialog/add-book-dialog.component";
 import {MakeOfferDialogComponent} from "../make-offer-dialog/make-offer-dialog.component";
 import {OfferService} from "../../services/offers/offer.service";
+import {ChatComponent} from "../chat/chat/chat.component";
 
 
 @Component({
@@ -31,13 +32,15 @@ export class OffersComponent implements OnInit {
               private dialog: MatDialog) {
   }
   ngOnInit(): void {
-    this.is_writer = localStorage.getItem('user_type') == 'writer';
+    console.log(localStorage.getItem('user_type'));
+    this.is_writer = localStorage.getItem('user_type') == 'writer' //|| localStorage.getItem('user_type') == 'admin';
     if( !this.is_writer) {
     this.filesService.getFiles().subscribe((data) => {
       this.books = data;
       this.books.forEach((file, index) => {
         this.userService.getUserByEmail(file.userEmail).subscribe((user) => {
-          file.userEmail = user?.first_name + ' ' + user?.last_name + ' ('+ user.username+')'
+          file.displayOwner = user?.first_name + ' ' + user?.last_name;
+          //file.userEmail = user?.first_name + ' ' + user?.last_name + ' ('+ user.username+')'
         });
       });
     });
@@ -72,6 +75,17 @@ export class OffersComponent implements OnInit {
   }
 
   chat(userEmail: string) {
-    
+    if (!userEmail) {
+      console.error('Invalid userEmail:', userEmail);
+      return;
+    }
+
+    console.log('Opening chat with user:', userEmail);
+
+    const dialogRef = this.dialog.open(ChatComponent, {
+      height: '400px',
+      minWidth: '400px',
+      data: { targetUserId: userEmail }
+    });
   }
 }

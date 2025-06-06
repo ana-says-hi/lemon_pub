@@ -6,6 +6,7 @@ import {Router, RouterLink} from '@angular/router';
 import { PeopleServiceService } from '../../services/peeps/people-service.service';
 import {User} from "../../model/user";
 import {AuthService} from "../../services/auth/auth.service";
+import {ChatService} from "../../services/chat/chat.service";
 
 @Component({
   selector: 'app-register-page',
@@ -23,8 +24,10 @@ export class RegisterPageComponent {
   currentStep: number = 0;
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private userService: PeopleServiceService,
-               private router: Router) { //private authService: AuthService,
+  constructor(private fb: FormBuilder,
+              private userService: PeopleServiceService,
+              private chatService: ChatService,
+              private router: Router) { //private authService: AuthService,
     this.form = this.fb.group({
       user_firstName: ['', Validators.required],
       user_lastName: [''],
@@ -68,7 +71,7 @@ export class RegisterPageComponent {
         this.form.value.user_lastName as string,
         this.form.value.user_phoneNr as string,
         false,
-        this.form.value.user_email as string,
+        this.form.value.user_type as string,
         // 'user',
         this.form.value.password as string
       );
@@ -99,6 +102,9 @@ export class RegisterPageComponent {
     } else {
       alert('Please fill in all required fields.');
     }
+
+    // this.chatService.createChatUser(this.form.value.user_email, this.form.value.username)
+
     localStorage.setItem('user_email', this.form.value.user_email);
     localStorage.setItem('user_type', this.form.value.user_type);
     this.router.navigate(['/']);

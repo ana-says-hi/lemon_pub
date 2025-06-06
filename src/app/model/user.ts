@@ -7,6 +7,7 @@ export class User {
   username: string;
   password: string;
   user_type: string;
+  token: string; // Optional token
   is_enabled: boolean;
 
   constructor(id: number, email: string, username: string, first_name: string, last_name:
@@ -20,6 +21,7 @@ export class User {
     this.phone_nr = phone_nr;
     this.is_enabled = is_enabled;
     this.user_type = user_type;
+    this.token = ''
   }
 
   toString() {

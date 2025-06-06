@@ -16,10 +16,11 @@ import {AngularFireAuth, AngularFireAuthModule} from "@angular/fire/compat/auth"
 import {BrowserModule} from "@angular/platform-browser";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
+import {StreamChatModule} from "stream-chat-angular";
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    importProvidersFrom(BrowserModule, BrowserAnimationsModule,
+    importProvidersFrom(BrowserModule, BrowserAnimationsModule, StreamChatModule,
       AngularFireStorageModule, AngularFireAuth, AngularFireModule.initializeApp(environment.firebaseConfig),),
     provideZoneChangeDetection({eventCoalescing: true}),
     provideRouter(routes, withComponentInputBinding()),
