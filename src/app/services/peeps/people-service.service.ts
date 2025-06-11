@@ -38,19 +38,6 @@ export class PeopleServiceService {
     //return id;
   }
 
-  // getUserByEmail(email: string): User | null {
-  //   // let id=-1;
-  //   for (let user of this.users) {
-  //     if (user.email == email) {
-  //       //id = user.id;
-  //       console.log("here");
-  //       return user;
-  //     }
-  //   }
-  //   return null;
-  //   // return id;
-  // }
-
   addUser(user: User)//:Observable<User>{
   {
     //console.log("KILLL MEEEEEEEE",user);

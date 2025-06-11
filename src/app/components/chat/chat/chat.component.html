@@ -1,23 +1,26 @@
-<p>chat works!</p>
-<!--<stream-chat>-->
-<!--  <stream-channel-list></stream-channel-list>-->
-<!--  <stream-channel>-->
-<!--    <stream-channel-header></stream-channel-header>-->
-<!--    <stream-message-list></stream-message-list>-->
-<!--    <stream-message-input></stream-message-input>-->
-<!--  </stream-channel>-->
-<!--</stream-chat>-->
+<body>
+<div class="dialog-header">
+  <h2>Chat with {{targetUserId}}</h2>
+</div>
+
 <div class="chat-container">
   <div class="messages">
     <div *ngFor="let msg of messages">
-      <strong>{{ msg.user.name }}:</strong> {{ msg.text }}
+      <div id="your_msg" *ngIf="msg.user?.id === loggedUserId">
+        You: {{ msg.text }}
+      </div>
+      <div id="other_msg" *ngIf="msg.user?.id !== loggedUserId">
+        {{ msg.user.name }}: {{ msg.text }}
+      </div>
+      <!--      <strong>{{ msg.user.name }}:</strong> {{ msg.text }}-->
     </div>
   </div>
 
   <div class="input">
-    <input [(ngModel)]="inputMessage" placeholder="Type your message..." />
+    <input type="file" (change)="onFileSelected($event)"/>
+    <input [(ngModel)]="inputMessage" placeholder="Type your message..."/>
     <button (click)="sendMessage()">Send</button>
   </div>
 </div>
 
-
+</body>

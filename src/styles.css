@@ -73,3 +73,20 @@ label {
   color: lightgoldenrodyellow;
   font-weight: 600;
 }
+
+.dialog-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1F1C3F;
+  height: fit-content(100vh);
+  /*margin-bottom: 20px;*/
+}
+
+.dialog-header h2 {
+  font-size: 24px;
+  text-align: center;
+  color: lightgoldenrodyellow;
+  margin-top: 10px;
+  font-weight: bold;
+}

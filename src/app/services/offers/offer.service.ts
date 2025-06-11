@@ -8,7 +8,7 @@ import {Offer} from "../../model/offer";
   providedIn: 'root'
 })
 export class OfferService {
-  private apiUrl = 'http://localhost:3532/api/bids'
+  private apiUrl = 'http://localhost:3532/api/offers'
   constructor(private httpClient: HttpClient) { }
 
   addOffer(offer: Offer): Observable<Offer> {

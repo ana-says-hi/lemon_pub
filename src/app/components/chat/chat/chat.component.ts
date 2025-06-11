@@ -6,9 +6,10 @@ import {BrowserModule} from "@angular/platform-browser";
 import {CommonModule} from "@angular/common";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {Channel, StreamChat} from "stream-chat";
-import type {Event} from 'stream-chat';
+import type {Event as StreamEvent} from 'stream-chat';
 import {ChannelService, ChatClientService, StreamI18nService} from "stream-chat-angular";
 import {Offer} from "../../../model/offer";
+import type {Attachment} from 'stream-chat';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class ChatComponent implements OnInit, OnDestroy {
   public messages: any[] = [];
   public inputMessage: string = '';
   private channel!: Channel;
+  selectedFile: File | null = null;
 
   loggedUserId: string = '';
   targetUserId: string = '';
@@ -54,7 +56,7 @@ export class ChatComponent implements OnInit, OnDestroy {
     await this.channel.watch();
 
     // Listen to new messages
-    this.channel.on('message.new', (event: Event) => {
+    this.channel.on('message.new', (event: StreamEvent) => {
       if (event.message) {
         this.messages.push(event.message); // Push new messages to the array
       }
@@ -66,10 +68,39 @@ export class ChatComponent implements OnInit, OnDestroy {
   }
 
   async sendMessage() {
-    if (this.inputMessage.trim() !== '') {
-      const message = await this.channel.sendMessage({ text: this.inputMessage });
+    let attachments: Attachment[] = [];
+    if (this.inputMessage.trim() !== '' || this.selectedFile) {
+      //const message = await this.channel.sendMessage({ text: this.inputMessage });
       //this.messages.push(message.message);
+
+      if (this.selectedFile) {
+        const response = await this.channel.sendFile(this.selectedFile);
+
+        attachments = [
+          {
+            type: 'file',
+            asset_url: response.file,
+            title: this.selectedFile.name,
+            mime_type: this.selectedFile.type,
+          }
+        ];
+      }
+
+      await this.channel.sendMessage({
+        text: this.inputMessage || this.selectedFile?.name || '',
+        attachments,
+      });
+
       this.inputMessage = '';
+      this.selectedFile = null;
+    }
+  }
+
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement | null;
+    const file = input?.files?.[0];
+    if (file) {
+      this.selectedFile = file;
     }
   }
 

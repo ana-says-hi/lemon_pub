@@ -21,7 +21,7 @@ exports.getUserToken = async (req, res) => {
   });
 
   if(user.token!=null && user.token != '') {
-    console.log("token1: " + user.token);
+    // console.log("token1: " + user.token);
     return res.json({token: user.token});
   }
 

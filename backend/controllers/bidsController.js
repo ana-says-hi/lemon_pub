@@ -10,9 +10,10 @@ exports.getAllBids = async (req, res) => {
   }
 };
 
-exports.getBidByUser = async(req,res)=>{
+exports.getBidsByUser = async(req, res)=>{
   try {
-    const snapshot = await db.collection('bids').where('agent', '==', req.params.email ||'writer', '==', req.params.email).get();
+    const snapshot = await db.collection('bids')
+      .where('writer', '==', req.params.email).get();
     const files = snapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));
     res.json(files);
   } catch (err) {
@@ -22,14 +23,22 @@ exports.getBidByUser = async(req,res)=>{
 
 exports.createBid  = async (req, res) => {
   try {
-    const {agent, autor, book_id, expiration_date, offer, timestamp, active, accepted} = req.body;
-    // if (!userEmail || !book_title || !description || !file_type || !visibility || !timestamp || !storage_link) {
-    //   return res.status(400).json({ message: 'All fields are required' });
+    const { user_email, book_title, min_value, offers } = req.body;
+    // if (!user_email || !book_title || !min_value || !offers) {
+    //   return res.status(400).json({ error: "Missing required fields" });
     // }
-    const id = `${agent}_${timestamp}`;
-    const newBid = {agent, autor, book_id, expiration_date, offer, timestamp, active, accepted};
-    await db.collection('bids').doc(id).set(newBid);
-    res.json({id, ...newBid});
+    const timestamp = Date.now();
+    const docId = `${user_email}_${timestamp}`;
+    const bidData = {
+      active: true,
+      user_email,
+      book_title,
+      min_value,
+      offers,
+    };
+    await db.collection("bids").doc(docId).set(bidData);
+    // return res.status(201).json({ message: "Bid created", id: docId });
+    res.json({docId, ...bidData});
   } catch (err) {
     res.status(500).send('Server Error');
   }
