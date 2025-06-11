@@ -34,7 +34,7 @@ exports.createBid  = async (req, res) => {
       user_email,
       book_title,
       min_value,
-      offers,
+      offers: offers || [],
     };
     await db.collection("bids").doc(docId).set(bidData);
     // return res.status(201).json({ message: "Bid created", id: docId });

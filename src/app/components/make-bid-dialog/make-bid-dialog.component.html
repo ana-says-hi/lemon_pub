@@ -1,0 +1,32 @@
+<body>
+
+<div class="dialog-header">
+  <h2>Start a bid</h2>
+</div>
+
+<div class="dialog-body">
+  <div>
+    <label> The bid will be for:</label>
+    <select id="book_select"
+            [(ngModel)]="selectedBook" name="selectedBook">
+      <ng-container *ngFor="let book of books">
+        <option [ngValue]="book">{{ book.book_title }}</option>
+      </ng-container>
+    </select>
+
+    <br>
+
+    <label> What is the offer you would like to start from? </label>
+    <textarea id="book-desc-area" [(ngModel)]="value"
+              name="selectedBookDescription"></textarea>
+
+
+    <div class="button-container">
+      <button mat-button (click)="saveBid()">Make Offer</button>
+      <button mat-button (click)="closeDialog()">Cancel</button>
+    </div>
+
+  </div>
+</div>
+
+</body>

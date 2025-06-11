@@ -27,7 +27,7 @@ app.use('/api/peeps', require('./routes/peeps'));
 app.use('/api/user_files', require('./routes/userFiles'));
 app.use('/api/offers', require('./routes/offers'));
 app.use('/api/bids', require('./routes/bids'));
-app.use('/api/forums', require('./routes/forums'));
+// app.use('/api/forums', require('./routes/forums'));
 // app.use('/api/messages', require('./routes/messages'));
 app.use('/api/token', require('./routes/token'));
 

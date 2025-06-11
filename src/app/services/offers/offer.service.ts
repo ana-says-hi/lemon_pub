@@ -3,6 +3,7 @@ import {catchError, Observable, throwError} from "rxjs";
 import {UserFile} from "../../model/user_file";
 import {HttpClient} from "@angular/common/http";
 import {Offer} from "../../model/offer";
+import {Bid} from "../../model/bid";
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +20,9 @@ export class OfferService {
         return throwError(() => new Error('Failed to add file. Please try again later.'));
       })
     );
+  }
+
+  getOffersByUser(email: string): Observable<Offer[]> {
+    return this.httpClient.get<Offer[]>(`${this.apiUrl}/${email}`)
   }
 }

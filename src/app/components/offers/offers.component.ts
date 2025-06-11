@@ -8,6 +8,10 @@ import {AddBookDialogComponent} from "../add-book-dialog/add-book-dialog.compone
 import {MakeOfferDialogComponent} from "../make-offer-dialog/make-offer-dialog.component";
 import {OfferService} from "../../services/offers/offer.service";
 import {ChatComponent} from "../chat/chat/chat.component";
+import {MakeBidDialogComponent} from "../make-bid-dialog/make-bid-dialog.component";
+import {BidsService} from "../../services/bids/bids.service";
+import {Bid} from "../../model/bid";
+import {Offer} from "../../model/offer";
 
 
 @Component({
@@ -21,31 +25,52 @@ import {ChatComponent} from "../chat/chat/chat.component";
   styleUrl: './offers.component.css'
 })
 export class OffersComponent implements OnInit {
-  books: UserFile[] = [];
-  showMore: boolean[] = [];
-  loading:boolean=true;
+  user_email: string = '';
   is_writer: boolean = true;
 
+  showMore: boolean[] = [];
+  loading: boolean = true;
+
+  books: UserFile[] = [];
+  bids: Bid[] = [];
+  offers: Offer[] = [];
+
   constructor(private filesService: FilesServiceService,
-              private userService:PeopleServiceService,
-              private offerService:OfferService,
+              private userService: PeopleServiceService,
+              private offerService: OfferService,
+              private bidsService: BidsService,
               private dialog: MatDialog) {
   }
+
   ngOnInit(): void {
-    console.log(localStorage.getItem('user_type'));
-    this.is_writer = localStorage.getItem('user_type') == 'writer' //|| localStorage.getItem('user_type') == 'admin';
-    if( !this.is_writer) {
-    this.filesService.getFiles().subscribe((data) => {
-      this.books = data;
-      this.books.forEach((file, index) => {
-        this.userService.getUserByEmail(file.userEmail).subscribe((user) => {
-          file.displayOwner = user?.first_name + ' ' + user?.last_name;
-          //file.userEmail = user?.first_name + ' ' + user?.last_name + ' ('+ user.username+')'
+    this.user_email = localStorage.getItem('user_email') || "user_not_logged_in";
+    // console.log(localStorage.getItem('user_type'));
+    this.is_writer = localStorage.getItem('user_type') == 'writer' || localStorage.getItem('user_type') == 'admin';
+    if (!this.is_writer) {
+      this.filesService.getFiles().subscribe((data) => {
+        this.books = data;
+        this.books.forEach((file, index) => {
+          this.userService.getUserByEmail(file.userEmail).subscribe((user) => {
+            file.displayOwner = user?.first_name + ' ' + user?.last_name;
+            //file.userEmail = user?.first_name + ' ' + user?.last_name + ' ('+ user.username+')'
+          });
         });
       });
-    });
-    this.loading=false;
+
+      this.bidsService.getAllBids().subscribe((data: Bid[]) => {
+        this.bids = data;
+      });
+
+      this.loading = false;
     }
+    else{
+      this.bidsService.getBidbyUser(this.user_email).subscribe((data: Bid[]) => {
+        this.bids = data;
+      });
+    }
+    this.offerService.getOffersByUser(this.user_email).subscribe((data: Offer[]) => {
+      this.offers = data;
+    });
   }
 
   toggleReadMore(index: number): void {
@@ -57,7 +82,7 @@ export class OffersComponent implements OnInit {
       .open(MakeOfferDialogComponent, {
         height: '400px',
         minWidth: '400px',
-        data:{book: book.book_title, autor: book.userEmail}
+        data: {book: book.book_title, autor: book.userEmail}
       });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -67,7 +92,7 @@ export class OffersComponent implements OnInit {
             console.log('Offer added successfully:', response);
           },
           error: (err) => {
-            console.error('Error occurred while adding file meta:', err);
+            console.error('Error occurred while adding offer:', err);
           }
         });
       }
@@ -85,7 +110,27 @@ export class OffersComponent implements OnInit {
     const dialogRef = this.dialog.open(ChatComponent, {
       height: '400px',
       minWidth: '400px',
-      data: { targetUserId: userEmail }
+      data: {targetUserId: userEmail}
+    });
+  }
+
+  makeBid() {
+    const dialogRef = this.dialog.open(MakeBidDialogComponent, {
+      height: '400px',
+      width: '400px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.bidsService.createBid(result).subscribe({
+          next: (response) => {
+            console.log('Bid added successfully:', response);
+          },
+          error: (err) => {
+            console.error('Error occurred while adding bid:', err);
+          }
+        });
+      }
     });
   }
 }
