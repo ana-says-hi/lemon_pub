@@ -27,6 +27,7 @@ import {Offer} from "../../model/offer";
 export class OffersComponent implements OnInit {
   user_email: string = '';
   is_writer: boolean = true;
+  is_admin: boolean = false;
 
   showMore: boolean[] = [];
   loading: boolean = true;
@@ -45,7 +46,8 @@ export class OffersComponent implements OnInit {
   ngOnInit(): void {
     this.user_email = localStorage.getItem('user_email') || "user_not_logged_in";
     // console.log(localStorage.getItem('user_type'));
-    this.is_writer = localStorage.getItem('user_type') == 'writer' || localStorage.getItem('user_type') == 'admin';
+    this.is_writer = localStorage.getItem('user_type') == 'writer';
+    this.is_admin = localStorage.getItem('user_type') == 'admin';
     if (!this.is_writer) {
       this.filesService.getFiles().subscribe((data) => {
         this.books = data;
@@ -59,18 +61,19 @@ export class OffersComponent implements OnInit {
 
       this.bidsService.getAllBids().subscribe((data: Bid[]) => {
         this.bids = data;
+        console.log("bids:",this.bids)
       });
-
-      this.loading = false;
     }
     else{
       this.bidsService.getBidbyUser(this.user_email).subscribe((data: Bid[]) => {
         this.bids = data;
+        console.log("bids:",this.bids)
       });
     }
     this.offerService.getOffersByUser(this.user_email).subscribe((data: Offer[]) => {
       this.offers = data;
     });
+    this.loading = false;
   }
 
   toggleReadMore(index: number): void {

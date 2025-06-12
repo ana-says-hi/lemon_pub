@@ -74,12 +74,13 @@ button {
   cursor: pointer;
   transition: background 0.3s;
   border-color: #1F1C3F;
+  background-color: floralwhite;
 }
 
 button:hover {
   background: #433C5F;
-  color: white;
-  border-color: white;
+  color: floralwhite;
+  border-color: floralwhite;
 }
 
 #result-div {

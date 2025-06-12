@@ -6,7 +6,7 @@
   Filter by genre, author
 </div>
 
-<div class="agent-page"  *ngIf="!is_writer">
+<div class="agent-page" *ngIf="!is_writer || is_admin">
   <div *ngIf="!loading">
     <div *ngFor="let book of books; let i = index" class="book-container">
       <div class="button-container">
@@ -14,37 +14,56 @@
         <button class="button" (click)="chat(book.userEmail)">Talk to writer.</button>
       </div>
       <div class="book">
-      <img
-        alt="cover" src="assets/icons-ish/wiwiwi.jpeg" class="cover"/>
-      <div class="book-info">
-        <h3>{{ book.book_title }} - by {{book.userEmail}}</h3>
-        <div class="description-wrapper" [class.expanded]="showMore[i]">
-          <p class="description">{{ book.description }}</p>
-          <div class="fade-out" *ngIf="!showMore[i]"></div>
+        <img
+          alt="cover" src="assets/icons-ish/wiwiwi.jpeg" class="cover"/>
+        <div class="book-info">
+          <h3>{{ book.book_title }} - by {{book.userEmail}}</h3>
+          <div class="description-wrapper" [class.expanded]="showMore[i]">
+            <p class="description">{{ book.description }}</p>
+            <div class="fade-out" *ngIf="!showMore[i]"></div>
+          </div>
+          <button class="read-more" (click)="toggleReadMore(i)">
+            Read {{ showMore[i] ? 'Less &uarr;' : 'More &darr;' }}</button>
         </div>
-        <button class="read-more" (click)="toggleReadMore(i)">
-          Read {{ showMore[i] ? 'Less &uarr;' : 'More &darr;' }}</button>
       </div>
-    </div>
     </div>
   </div>
 </div>
 
 
-<div class="writer-page" *ngIf="is_writer">
+<div class="writer-page" *ngIf="is_writer || is_admin">
   <p>Make offers start flowing in by starting a bid! </p>
 
   <button class="button" (click)="makeBid()">Start a bid</button>
 
   <hr>
 
-  <div class="book-offers">
-    <h3>Book Title</h3>
+  <div class="bid-container">
+    <div *ngFor="let bid of bids; let i = index" class="bid">
+      <h3>{{bid.book_title}} </h3>
+      <!--      <p *ngIf="bid.active">Active bid</p>-->
+      <!--      <p *ngIf="!bid.active">Non-active bid</p>-->
+
+      <div class="book-container">
+        <div *ngFor="let offer of offers; let i = index" class="book-offer">
+          <div class="offer">
+            <p><span> {{offer.agent}} </span></p>
+            <p id="value"><span> Value:</span> {{offer.offer}}</p>
+            <button class="accept_button">Accept</button>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+  <div *ngFor="let offer of offers; let i = index" class="book-offer">
+    <h4>{{offer.book_id}}</h4>
 
     <div class="offer">
-      <p>Offered by: <span>John Doe</span></p>
-      <p>Price: <span>$10</span></p>
-      <button class="button">Accept</button>
+      <p>Offered by: <span>{{offer.agent}}</span></p>
+      <p>Value: <span>{{offer.offer}}</span></p>
+      <button class="accept_button">Accept</button>
     </div>
   </div>
 </div>

@@ -13,7 +13,7 @@ exports.getAllBids = async (req, res) => {
 exports.getBidsByUser = async(req, res)=>{
   try {
     const snapshot = await db.collection('bids')
-      .where('writer', '==', req.params.email).get();
+      .where('user_email', '==', req.params.email).get();
     const files = snapshot.docs.map(doc => ({id: doc.id, ...doc.data()}));
     res.json(files);
   } catch (err) {

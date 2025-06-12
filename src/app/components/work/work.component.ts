@@ -4,8 +4,6 @@ import {UserFile} from "../../model/user_file";
 import {CommonModule} from '@angular/common';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {AddBookDialogComponent} from "../add-book-dialog/add-book-dialog.component";
-import {reload} from "@angular/fire/auth";
-import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-work',
