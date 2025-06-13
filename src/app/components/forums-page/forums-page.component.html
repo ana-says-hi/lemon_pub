@@ -1,5 +1,10 @@
-<h2>Create a Forum</h2>
-<form (ngSubmit)="createTopic()">
+<body>
+
+<div class="warning">
+<p>Join a discussion about a publishing partner or genre!
+  If you cannot find anything of your liking, create your own forum!</p>
+</div>
+  <form id="form" (ngSubmit)="createTopic()">
   <input type="text" [(ngModel)]="newTopicName" name="topicName" placeholder="New topic name" required>
   <button type="submit">Create</button>
 </form>
@@ -7,48 +12,13 @@
 <hr>
 
 <h2>Available Forums</h2>
-<ul *ngIf="topics$ | async as topics">
-  <li *ngFor="let topic of topics">
-    <a [routerLink]="['/forums', topic.id]">{{ topic.name }}</a>
-  </li>
-</ul>
+<div *ngIf="topics$ | async as topics">
+  <div class="topic" *ngFor="let topic of topics">
+    <a [routerLink]="['/forums', topic.id]">
+      <img src="color" alt="Topic Image" class="topic-image" />
+      {{ topic.name }}
+    </a>
+  </div>
+</div>
 
-
-<!--<body>-->
-<!--<p>forums works!</p>-->
-
-<!--<button> Create forum! </button>-->
-
-<!--<div class="search-container">-->
-<!--  <input type="text" placeholder="Search..." class="search-input">-->
-<!--  <button class="search-button">Search</button>-->
-<!--</div>-->
-
-<!--<hr>-->
-
-<!--<div class="forums-container">-->
-<!--  <div class="forum-is_member">-->
-<!--    <img src="https://via.placeholder.com/150" alt="hashtag" class="forum-image">-->
-<!--    <h3> Forum Title </h3>-->
-<!--    <p> Forum Description </p>-->
-<!--    <div class="forum-members">-->
-<!--      <div class="member">-->
-<!--        <img src="https://via.placeholder.com/50" alt="member" class="member-image">-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-
-<!--  <div class="forum-is_not_member">-->
-<!--    <img src="https://via.placeholder.com/150" alt="hashtag" class="forum-image">-->
-<!--    <h3> Forum Title </h3>-->
-<!--    <p> Forum Description </p>-->
-<!--    <div class="forum-members">-->
-<!--      <div class="member">-->
-<!--        <img src="https://via.placeholder.com/50" alt="member" class="member-image">-->
-<!--      </div>-->
-<!--    </div>-->
-<!--    <button> Join! </button>-->
-<!--  </div>-->
-<!--</div>-->
-
-<!--</body>-->
+</body>
