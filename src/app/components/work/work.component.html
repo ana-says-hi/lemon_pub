@@ -19,7 +19,7 @@
     <button class="read-more" (click)="toggleReadMore(i)">Read {{ showMore[i] ? 'Less &uarr;' : 'More &darr;' }}</button>
 
   </div>
-  <img [src]="getFileTypeIcon(book.file_type)" alt="file-type" class="file-type-icon"/>
+  <img [src]="getFileTypeIcon(book.file_type)" (click)="openFile(book.storage_link)" alt="file-type" class="file-type-icon"/>
 
 <!--  sources for the pics:
 files="https://www.flaticon.com/free-icons/files-and-folders"

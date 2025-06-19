@@ -4,6 +4,7 @@ import {UserFile} from "../../model/user_file";
 import {CommonModule} from '@angular/common';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {AddBookDialogComponent} from "../add-book-dialog/add-book-dialog.component";
+import {FilePreviewDialogComponent} from "../file-preview-dialog/file-preview-dialog.component";
 
 @Component({
   selector: 'app-work',
@@ -71,4 +72,15 @@ export class WorkComponent implements OnInit {
     this.showMore[index] = !this.showMore[index];
   }
 
+  openFile(storageRef: string): void {
+  console.log('Opening file with storageRef:', storageRef);
+    if(storageRef) {
+    const dialogRef = this.dialog
+      .open(FilePreviewDialogComponent, {
+        height: '500px',
+        minWidth: '700px',
+        data: { storageRef: storageRef }
+      });
+    }
+  }
 }
